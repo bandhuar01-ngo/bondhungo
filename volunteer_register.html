@@ -1644,6 +1644,34 @@
       setTimeout(() => clearInterval(iv), 15000);
     }
   </script>
+
+  <!-- FOOTER -->
+  <footer style="
+    background: var(--green-dark);
+    color: rgba(255,255,255,0.7);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    padding: 14px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  ">
+    <span>
+      © <span id="footer-year"></span> Bondhu NGO |
+      <a href="#" style="color: #7ec8a0; text-decoration: underline;">Terms and conditions</a>
+    </span>
+    <span>
+      Associated with <a href="https://arnetworkhouse.in/" style="color: #7ec8a0; text-decoration: none;">AR Network House</a>
+    </span>
+    <span>
+      Serving with 💕 since 2017
+    </span>
+  </footer>
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+  </script>
 </body>
 
 </html>
