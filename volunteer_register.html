@@ -388,8 +388,25 @@
       box-shadow: 0 0 0 3px rgba(27, 110, 63, 0.1);
     }
 
-    .input-wrap input.error {
+    .input-wrap input.error,
+    .input-wrap select.error,
+    .input-wrap textarea.error {
       border-color: #e53e3e;
+      box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.10);
+    }
+
+    .field-error {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .field-error::before {
+      content: '\f071';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      font-size: 0.7rem;
+      flex-shrink: 0;
     }
 
     .field-error {
@@ -1125,7 +1142,7 @@
               <i class="fas fa-birthday-cake"></i>
               <input type="date" id="f_dob">
             </div>
-            <div class="field-error" id="err_dob">Required.</div>
+            <div class="field-error" id="err_dob">Please enter your date of birth.</div>
           </div>
           <div class="field-group">
             <label>Gender <span class="req">*</span></label>
@@ -1238,7 +1255,7 @@
             <label>ID Type <span class="req">*</span></label>
             <div class="input-wrap">
               <i class="fas fa-id-card"></i>
-              <select id="f_idtype">
+              <select id="f_idtype" onchange="updateIdPlaceholder()">
                 <option value="">Select ID type</option>
                 <option>Aadhaar Card</option>
                 <option>Voter ID</option>
@@ -1256,6 +1273,7 @@
               <input type="text" id="f_idnum" placeholder="Enter your ID number">
             </div>
             <div class="field-error" id="err_idnum">Please enter your ID number.</div>
+            <div id="id_hint" style="font-size:0.75rem;color:var(--text-light);margin-top:4px;min-height:1rem;"></div>
           </div>
         </div>
 
@@ -1413,11 +1431,66 @@
     // ── VALIDATION HELPERS ──
     function showErr(id, msg) {
       const el = document.getElementById(id);
-      el.textContent = msg || el.textContent;
+      if (msg) el.textContent = msg;
       el.classList.add('show');
+      // Red border on the sibling input/select/textarea
+      const wrap = el.previousElementSibling;
+      if (wrap) {
+        const field = wrap.querySelector('input, select, textarea');
+        if (field) field.classList.add('error');
+      }
     }
-    function clearErr(id) { document.getElementById(id).classList.remove('show'); }
+    function clearErr(id) {
+      const el = document.getElementById(id);
+      el.classList.remove('show');
+      const wrap = el.previousElementSibling;
+      if (wrap) {
+        const field = wrap.querySelector('input, select, textarea');
+        if (field) field.classList.remove('error');
+      }
+    }
     function fieldVal(id) { return document.getElementById(id)?.value?.trim() || ''; }
+
+    // ── ID PLACEHOLDER + HINT ──
+    const ID_RULES = {
+      'Aadhaar Card':      { placeholder: '12-digit Aadhaar number', hint: '12 digits', validate: v => /^\d{12}$/.test(v.replace(/\s/g,'')) },
+      'PAN Card':          { placeholder: 'e.g. ABCDE1234F', hint: '10 chars (AAAAA0000A)', validate: v => /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(v.toUpperCase()) },
+      'Voter ID':          { placeholder: 'e.g. ABC1234567', hint: '10 alphanumeric chars', validate: v => /^[A-Z]{3}[0-9]{7}$/.test(v.toUpperCase()) },
+      'Passport':          { placeholder: 'e.g. A1234567', hint: '8 chars (Letter + 7 digits)', validate: v => /^[A-Z][0-9]{7}$/.test(v.toUpperCase()) },
+      'Driving Licence':   { placeholder: 'e.g. WB0120231234567', hint: '15–16 alphanumeric chars', validate: v => /^[A-Z0-9]{15,16}$/.test(v.toUpperCase().replace(/[-\s]/g,'')) },
+    };
+
+    function updateIdPlaceholder() {
+      const type = fieldVal('f_idtype');
+      const input = document.getElementById('f_idnum');
+      const hintEl = document.getElementById('id_hint');
+      clearErr('err_idnum');
+      clearErr('err_idtype');
+      if (ID_RULES[type]) {
+        input.placeholder = ID_RULES[type].placeholder;
+        if (hintEl) hintEl.textContent = '📋 Format: ' + ID_RULES[type].hint;
+      } else {
+        input.placeholder = 'Enter your ID number';
+        if (hintEl) hintEl.textContent = '';
+      }
+      input.value = '';
+    }
+
+    // ── AGE CALCULATION ──
+    function calcAge(dobStr) {
+      const dob = new Date(dobStr);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+      return age;
+    }
+
+    // ── SCROLL TO FIRST ERROR ──
+    function scrollToFirstError() {
+      const first = document.querySelector('.field-error.show');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 
     // ── STEP 1: SEND OTP ──
     function sendOTP() {
@@ -1463,6 +1536,20 @@
 
     // ── OTP INPUTS ──
     document.addEventListener('DOMContentLoaded', () => {
+      // Live clear DOB error
+      document.getElementById('f_dob').addEventListener('change', () => {
+        const dob = fieldVal('f_dob');
+        if (dob && calcAge(dob) >= 16) clearErr('err_dob');
+      });
+      // Live clear ID number error
+      document.getElementById('f_idnum').addEventListener('input', () => {
+        const idtype = fieldVal('f_idtype');
+        const idnum = fieldVal('f_idnum');
+        if (idnum && idtype && ID_RULES[idtype] && ID_RULES[idtype].validate(idnum)) {
+          clearErr('err_idnum');
+        }
+      });
+      // OTP inputs
       const boxes = document.querySelectorAll('.otp-box');
       boxes.forEach((box, i) => {
         box.addEventListener('input', e => {
@@ -1554,14 +1641,46 @@
       const areas = getSelectedTags();
       const why = fieldVal('f_why');
 
-      if (!dob) { showErr('err_dob'); ok = false; } else clearErr('err_dob');
-      if (!gender) { showErr('err_gender'); ok = false; } else clearErr('err_gender');
+      // DOB: required + age ≥ 16
+      if (!dob) {
+        showErr('err_dob', 'Please enter your date of birth.');
+        ok = false;
+      } else {
+        const age = calcAge(dob);
+        if (age < 16) {
+          showErr('err_dob', `You must be at least 16 years old to register. Your current age is ${age}.`);
+          ok = false;
+        } else {
+          clearErr('err_dob');
+        }
+      }
+
+      if (!gender) { showErr('err_gender', 'Please select your gender.'); ok = false; } else clearErr('err_gender');
       if (!house || !locality || !area || !district || !state) { showErr('err_address', 'Please fill all required address fields.'); ok = false; } else clearErr('err_address');
-      if (!idtype) { showErr('err_idtype'); ok = false; } else clearErr('err_idtype');
-      if (!idnum) { showErr('err_idnum'); ok = false; } else clearErr('err_idnum');
-      if (!areas) { showErr('err_areas', 'Please select at least one area.'); ok = false; } else clearErr('err_areas');
-      if (!why) { showErr('err_why'); ok = false; } else clearErr('err_why');
-      if (!ok) return;
+
+      // ID type
+      if (!idtype) { showErr('err_idtype', 'Please select an ID type.'); ok = false; } else clearErr('err_idtype');
+
+      // ID number: format-aware
+      if (!idnum) {
+        showErr('err_idnum', 'Please enter your ID number.');
+        ok = false;
+      } else if (idtype && ID_RULES[idtype]) {
+        const rule = ID_RULES[idtype];
+        if (!rule.validate(idnum)) {
+          showErr('err_idnum', `Invalid ${idtype} number. Expected format: ${rule.hint}.`);
+          ok = false;
+        } else {
+          clearErr('err_idnum');
+        }
+      } else {
+        clearErr('err_idnum');
+      }
+
+      if (!areas) { showErr('err_areas', 'Please select at least one area of interest.'); ok = false; } else clearErr('err_areas');
+      if (!why) { showErr('err_why', 'Please share your motivation for volunteering.'); ok = false; } else clearErr('err_why');
+
+      if (!ok) { scrollToFirstError(); return; }
 
       const btn = document.getElementById('submitBtn');
       btn.disabled = true;
