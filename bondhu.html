@@ -1,0 +1,2722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://raw.githubusercontent.com/bandhuar01-ngo/bondhungo/main/Bondhu_logo.png"
+    type="image/png">
+  <title>Bondhu – Together We Rise </title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --green: #1b6e3f;
+      --green-dark: #0f4527;
+      --green-mid: #258a50;
+      --green-pale: #e9f5ee;
+      --green-faint: #f3faf5;
+      --orange: #d97726;
+      --orange-light: #f5a623;
+      --cream: #fdf6ec;
+      --cream-dark: #f5ead6;
+      --text-dark: #1a2e1e;
+      --text-mid: #4a5a4e;
+      --text-light: #7a8e7e;
+      --white: #ffffff;
+      --border: #d5e8da;
+      --radius: 14px;
+      --shadow: 0 8px 32px rgba(27, 110, 63, 0.10);
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background: var(--white);
+    }
+
+    img {
+      display: block;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--cream);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--green);
+      border-radius: 6px;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--green-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      box-shadow: 0 3px 16px rgba(0, 0, 0, 0.22);
+      overflow: visible;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 0;
+      text-decoration: none;
+    }
+
+    .logo-slot {
+      width: 58px;
+      height: 58px;
+      min-width: 58px;
+
+
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      line-height: 1.4;
+      cursor: pointer;
+      transition: background .2s;
+      overflow: hidden;
+    }
+
+
+
+    .logo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .logo-text h1 {
+      font-family: var(--font-head);
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1.5px;
+    }
+
+    .logo-text span {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    nav a {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 500;
+      padding: 8px 13px;
+      border-radius: 6px;
+      transition: all .2s;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.13);
+      color: #fff;
+    }
+
+    .nav-home {
+      color: rgba(255, 255, 255, 0.85) !important;
+      font-weight: 600 !important;
+
+    }
+
+    /* ── FLOATING HOME BUTTON ── */
+    .floating-home-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #38b06c;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s, transform .3s, background .2s;
+      text-decoration: none;
+    }
+
+    .floating-home-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .floating-home-btn:hover {
+      background: #258a50;
+      transform: translateY(-3px) scale(1.07);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    .nav-join {
+      background: var(--orange) !important;
+      color: #fff !important;
+      margin-left: 6px;
+      border-radius: 50px !important;
+      padding: 8px 22px !important;
+      font-weight: 600 !important;
+    }
+
+    .nav-join:hover {
+      background: var(--orange-light) !important;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    /* ── MOBILE NAV SIDEBAR ── */
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1000;
+      backdrop-filter: blur(2px);
+    }
+
+    .mobile-nav-overlay.open {
+      display: block;
+    }
+
+    .mobile-nav {
+      display: block;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 270px;
+      height: 100%;
+      background: var(--green-dark);
+      z-index: 1001;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+      transform: translateX(100%);
+      transition: transform .28s cubic-bezier(.4, 0, .2, 1);
+      box-shadow: -8px 0 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .mobile-nav.open {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav-header span {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .mobile-back-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #fff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+
+    .mobile-back-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .mobile-nav-links {
+      padding: 12px 0;
+      flex: 1;
+    }
+
+    .mobile-nav a {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.88);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 13px 22px;
+      display: block;
+      transition: background .15s, color .15s;
+      border-left: 3px solid transparent;
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-left-color: var(--orange-light);
+    }
+
+    .mobile-nav .mobile-donate-link {
+      color: var(--orange-light) !important;
+      font-weight: 700 !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 6px;
+      padding-top: 16px !important;
+      font-size: 1rem !important;
+    }
+
+    .mobile-nav .mobile-donate-link:hover {
+      background: rgba(217, 119, 38, 0.15) !important;
+      border-left-color: var(--orange) !important;
+    }
+
+    .mobile-nav .mobile-join-link {
+      color: var(--orange-light) !important;
+    }
+
+    .mobile-close {
+      display: none;
+    }
+
+    /* ── DONATE MODAL ── */
+    .donate-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .donate-modal-overlay.open {
+      display: flex;
+    }
+
+    .donate-modal {
+      background: #fff;
+      border-radius: 20px;
+      padding: 36px 32px 32px;
+      max-width: 360px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+      animation: modalIn .22s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .donate-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-light);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .donate-modal-close:hover {
+      color: var(--text-dark);
+    }
+
+    .donate-modal h3 {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      color: var(--green-dark);
+      margin-bottom: 6px;
+    }
+
+    .donate-modal p {
+      font-size: 0.84rem;
+      color: var(--text-mid);
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    .qr-box {
+      background: var(--green-faint);
+      border: 2px dashed var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .qr-box img {
+      width: 180px;
+      height: 180px;
+      border-radius: 8px;
+      object-fit: contain;
+      margin: 0 auto;
+    }
+
+    .qr-placeholder {
+      width: 180px;
+      height: 180px;
+      background: #fff;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--text-light);
+      font-size: 0.78rem;
+      border: 2px solid var(--border);
+    }
+
+    .qr-placeholder i {
+      font-size: 2.2rem;
+      color: var(--green);
+    }
+
+    .qr-label {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .donate-upi {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      background: var(--cream);
+      padding: 8px 14px;
+      border-radius: 8px;
+      word-break: break-all;
+    }
+
+    .nav-donate {
+      background: rgba(217, 119, 38, 0.15) !important;
+      color: var(--orange-light) !important;
+      border: 1px solid rgba(217, 119, 38, 0.4) !important;
+      border-radius: 50px !important;
+      padding: 7px 18px !important;
+      font-weight: 600 !important;
+      font-size: 0.82rem !important;
+      margin-left: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .2s;
+    }
+
+    .nav-donate:hover {
+      background: var(--orange) !important;
+      color: #fff !important;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(140deg, #0a2e18 0%, var(--green-dark) 45%, var(--green) 100%);
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(245, 166, 35, 0.08) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 80px 5%;
+      max-width: 760px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(245, 166, 35, 0.18);
+      border: 1px solid rgba(245, 166, 35, 0.4);
+      color: var(--orange-light);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      padding: 7px 18px;
+      border-radius: 50px;
+      margin-bottom: 26px;
+      text-transform: uppercase;
+    }
+
+    .hero h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2.3rem, 5.5vw, 4.2rem);
+      color: #fff;
+      line-height: 1.12;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .hero h2 em {
+      color: var(--orange-light);
+      font-style: italic;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.85;
+      margin-bottom: 38px;
+      max-width: 580px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 0.94rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      transition: all .25s;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-light);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(217, 119, 38, .4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 0.94rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid rgba(255, 255, 255, .45);
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      transition: all .25s;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, .1);
+      transform: translateY(-3px);
+    }
+
+    .hero-stats {
+      display: flex;
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    /* ── GLASS FOUNDED BADGE ── */
+    .founded-glass {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 44px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      overflow: hidden;
+    }
+
+    /* sweeping light reflection */
+    .glass-shine {
+      position: absolute;
+      top: -60%;
+      left: -75%;
+      width: 55%;
+      height: 200%;
+      background: linear-gradient(105deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.28) 50%,
+          transparent 70%);
+      transform: skewX(-15deg);
+      animation: glassReflect 3.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes glassReflect {
+      0% {
+        left: -75%;
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      60% {
+        left: 130%;
+        opacity: 1;
+      }
+
+      61% {
+        opacity: 0;
+      }
+
+      100% {
+        left: 130%;
+        opacity: 0;
+      }
+    }
+
+    .founded-year {
+      font-family: var(--font-head);
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--orange-light);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .founded-lbl {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.65);
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      margin-top: 5px;
+    }
+
+    /* ── GRASS ANIMATION ── */
+    .hero-grass {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .grass-blade {
+      position: absolute;
+      bottom: 0;
+      width: 6px;
+      border-radius: 50% 50% 0 0;
+      transform-origin: bottom center;
+      animation: grassSway var(--dur, 2.2s) ease-in-out infinite alternate;
+      animation-delay: var(--delay, 0s);
+    }
+
+    @keyframes grassSway {
+      0% {
+        transform: rotate(var(--lean-l, -8deg)) scaleY(1);
+      }
+
+      50% {
+        transform: rotate(0deg) scaleY(1.04);
+      }
+
+      100% {
+        transform: rotate(var(--lean-r, 8deg)) scaleY(0.97);
+      }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 86px 5%;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--green-pale);
+      color: var(--green);
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--text-mid);
+      max-width: 560px;
+      line-height: 1.85;
+      margin-bottom: 52px;
+    }
+
+    .section-header {
+      text-align: center;
+    }
+
+    .section-header .section-sub {
+      margin: 0 auto 52px;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--cream);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-img-block {
+      background: var(--green-pale);
+      border-radius: 20px;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border: 2px dashed var(--border);
+    }
+
+    .img-placeholder {
+      text-align: center;
+      color: var(--green);
+      padding: 40px;
+    }
+
+    .img-placeholder i {
+      font-size: 3rem;
+      opacity: .4;
+      margin-bottom: 16px;
+    }
+
+    .img-placeholder p {
+      font-size: .83rem;
+      opacity: .55;
+    }
+
+    .about-corner {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: var(--green);
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .about-corner span {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .value-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: box-shadow .2s;
+    }
+
+    .value-card:hover {
+      box-shadow: var(--shadow);
+    }
+
+    .value-icon {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      background: var(--green-pale);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 1.1rem;
+    }
+
+    .value-card h4 {
+      font-size: .9rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .value-card p {
+      font-size: .78rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* ── PROGRAMS ── */
+    .programs {
+      background: #fff;
+    }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .program-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: all .3s;
+    }
+
+    .program-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+      border-color: var(--green);
+    }
+
+    .program-top {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .p-green {
+      background: linear-gradient(135deg, #e8f5ee, #c3e6d0);
+    }
+
+    .p-orange {
+      background: linear-gradient(135deg, #fef4e8, #fde0b4);
+    }
+
+    .p-teal {
+      background: linear-gradient(135deg, #e8faf6, #b8f0e6);
+    }
+
+    .p-cream {
+      background: linear-gradient(135deg, var(--cream), var(--cream-dark));
+    }
+
+    .p-yellow {
+      background: linear-gradient(135deg, #fefce8, #fef08a);
+    }
+
+    .p-pink {
+      background: linear-gradient(135deg, #fce8f0, #f9c5d8);
+    }
+
+    .program-body {
+      padding: 22px;
+    }
+
+    .program-body h3 {
+      font-size: 1.02rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .program-body p {
+      font-size: .83rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+    }
+
+    /* ── IMPACT ── */
+    .impact {
+      background: var(--green-dark);
+    }
+
+    .impact .section-tag {
+      background: rgba(255, 255, 255, .13);
+      color: rgba(255, 255, 255, .9);
+    }
+
+    .impact .section-title {
+      color: #fff;
+    }
+
+    .impact .section-sub {
+      color: rgba(255, 255, 255, .68);
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .impact-card {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 18px;
+      padding: 34px 24px;
+      text-align: center;
+      transition: background .2s;
+    }
+
+    .impact-card:hover {
+      background: rgba(255, 255, 255, .13);
+    }
+
+    .impact-card .num {
+      font-family: var(--font-head);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--orange-light);
+    }
+
+    .impact-card .unit {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--orange-light);
+    }
+
+    .impact-card p {
+      font-size: .84rem;
+      color: rgba(255, 255, 255, .65);
+      margin-top: 10px;
+      line-height: 1.55;
+    }
+
+    /* ── TIMELINE EVENTS ── */
+    .events {
+      background: var(--cream);
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--green), var(--green-mid), var(--orange));
+      transform: translateX(-50%);
+      border-radius: 4px;
+    }
+
+    .tl-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .tl-item:nth-child(odd) {
+      flex-direction: row;
+    }
+
+    .tl-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .tl-card {
+      width: 44%;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px 26px;
+      box-shadow: 0 4px 18px rgba(27, 110, 63, .07);
+      transition: all .3s;
+    }
+
+    .tl-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .tl-item:nth-child(odd) .tl-card {
+      margin-right: auto;
+    }
+
+    .tl-item:nth-child(even) .tl-card {
+      margin-left: auto;
+    }
+
+    .tl-dot {
+      position: absolute;
+      left: 50%;
+      top: 24px;
+      width: 18px;
+      height: 18px;
+      background: var(--green);
+      border: 3px solid #fff;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 0 3px var(--green-pale);
+      z-index: 2;
+    }
+
+    .tl-item.milestone .tl-dot {
+      background: var(--orange);
+      box-shadow: 0 0 0 3px rgba(217, 119, 38, .2);
+    }
+
+    .tl-date {
+      font-size: .72rem;
+      font-weight: 600;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 7px;
+    }
+
+    .tl-item.milestone .tl-date {
+      color: var(--orange);
+    }
+
+    .tl-card h3 {
+      font-size: 1.02rem;
+      font-weight: 600;
+      margin-bottom: 9px;
+    }
+
+    .tl-card p {
+      font-size: .82rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .tl-tag {
+      display: inline-block;
+      margin-top: 14px;
+      background: var(--green-pale);
+      color: var(--green);
+      font-size: .7rem;
+      font-weight: 600;
+      padding: 4px 13px;
+      border-radius: 50px;
+    }
+
+    .tl-item.milestone .tl-tag {
+      background: rgba(217, 119, 38, .12);
+      color: var(--orange);
+    }
+
+    .tl-emoji {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    /* ── PEOPLE HELPED ── */
+    .people {
+      background: #fff;
+    }
+
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .person-card {
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      border-radius: 18px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: all .3s;
+    }
+
+    .person-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+      border-color: var(--border);
+    }
+
+    .person-avatar {
+      width: 70px;
+      height: 70px;
+      background: var(--green-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 16px;
+      border: 2px solid var(--border);
+    }
+
+    .person-card h4 {
+      font-size: .98rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .person-card .role {
+      font-size: .76rem;
+      color: var(--orange);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .person-card p {
+      font-size: .81rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    /* ── GALLERY ── */
+    .gallery {
+      background: var(--cream);
+    }
+
+    .gallery-controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 38px;
+    }
+
+    .filter-btn {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      color: var(--text-mid);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: inherit;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-item {
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/3;
+      background: var(--green-pale);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all .3s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.03);
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 69, 39, .85) 0%, transparent 55%);
+      display: flex;
+      align-items: flex-end;
+      opacity: 0;
+      transition: opacity .3s;
+      padding: 16px;
+    }
+
+    .gallery-item:hover .overlay {
+      opacity: 1;
+    }
+
+    .overlay-text {
+      color: #fff;
+      font-size: .81rem;
+      font-weight: 500;
+    }
+
+    .gallery-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--green);
+      gap: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .gallery-placeholder i {
+      font-size: 2rem;
+      opacity: .35;
+    }
+
+    .gallery-placeholder span {
+      font-size: .73rem;
+      opacity: .5;
+    }
+
+    .gallery-loading {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 70px 20px;
+      color: var(--text-light);
+      font-size: .9rem;
+    }
+
+    .gallery-loading i {
+      font-size: 2.2rem;
+      margin-bottom: 14px;
+      display: block;
+      color: var(--green);
+      animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .sheet-hint {
+      text-align: center;
+      margin-top: 26px;
+      background: var(--green-faint);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 24px;
+      font-size: .82rem;
+      color: var(--text-mid);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sheet-hint code {
+      background: rgba(27, 110, 63, .08);
+      color: var(--green);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: .78rem;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, .93);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 26px;
+      background: rgba(255, 255, 255, .1);
+      border: none;
+      color: #fff;
+      font-size: 1.6rem;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, .22);
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 26px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, .7);
+      color: #fff;
+      padding: 10px 26px;
+      border-radius: 50px;
+      font-size: .84rem;
+      white-space: nowrap;
+    }
+
+    /* ── VOLUNTEER ── */
+    .volunteer {
+      background: #fff;
+    }
+
+    .volunteer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .vol-form-wrap {
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      border-radius: 22px;
+      padding: 40px;
+    }
+
+    .vol-form-wrap h3 {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 26px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: .81rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--text-mid);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 9px;
+      font-size: .87rem;
+      font-family: inherit;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color .2s;
+      background: #fff;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--green);
+    }
+
+    .submit-msg {
+      display: none;
+      background: var(--green-pale);
+      color: var(--green);
+      padding: 14px;
+      border-radius: 9px;
+      font-size: .87rem;
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .vol-info h3 {
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+    }
+
+    .vol-perks {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .perk-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .perk-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: var(--green-pale);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 1.1rem;
+    }
+
+    .perk-item h4 {
+      font-size: .92rem;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .perk-item p {
+      font-size: .8rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* ── DONATE BANNER ── */
+    .donate-banner {
+      background: linear-gradient(135deg, var(--orange) 0%, #e8a520 100%);
+      padding: 66px 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .donate-heart {
+      position: absolute;
+      top: -60px;
+      font-size: 1.6rem;
+      animation: heartFall linear infinite;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0;
+    }
+
+    @keyframes heartFall {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.75;
+      }
+
+      85% {
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: translateY(110vh) rotate(360deg) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    .donate-banner h2 {
+      font-family: var(--font-head);
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .donate-banner p {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, .88);
+      margin-bottom: 36px;
+    }
+
+    .donate-qr-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 28px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-radius: 20px;
+      padding: 22px 32px;
+      backdrop-filter: blur(6px);
+    }
+
+    .donate-qr-wrap img {
+      width: 130px;
+      height: 130px;
+      border-radius: 12px;
+      object-fit: contain;
+      background: #fff;
+      padding: 6px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    .donate-qr-msg {
+      text-align: left;
+      max-width: 260px;
+    }
+
+    .donate-qr-msg h4 {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .donate-qr-msg p {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    .donate-qr-msg .qr-upi {
+      margin-top: 10px;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 540px) {
+      .donate-qr-wrap {
+        flex-direction: column;
+        padding: 22px 20px;
+      }
+
+      .donate-qr-msg {
+        text-align: center;
+        max-width: 100%;
+      }
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: var(--cream);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-family: var(--font-head);
+      font-size: 1.7rem;
+      margin-bottom: 26px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      background: var(--green-pale);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 1.1rem;
+    }
+
+    .contact-item h4 {
+      font-size: .83rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .contact-item p,
+    .contact-item a {
+      font-size: .95rem;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      color: var(--green);
+    }
+
+    .map-wrap {
+      background: var(--green-pale);
+      border-radius: 18px;
+      overflow: hidden;
+      height: 340px;
+      border: 2px dashed var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 14px;
+      color: var(--green);
+      font-size: .87rem;
+      text-align: center;
+    }
+
+    .map-wrap i {
+      font-size: 2.5rem;
+      opacity: .45;
+    }
+
+    .map-wrap strong {
+      font-size: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text-dark);
+      color: rgba(255, 255, 255, .72);
+    }
+
+    .footer-top {
+      padding: 62px 5% 42px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+    }
+
+    .footer-brand p {
+      font-size: .84rem;
+      line-height: 1.85;
+      margin-top: 14px;
+      margin-bottom: 20px;
+      max-width: 300px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-links a {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, .6);
+      font-size: .9rem;
+      text-decoration: none;
+      transition: all .2s;
+    }
+
+    .social-links a:hover {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+      letter-spacing: .5px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul a {
+      color: rgba(255, 255, 255, .55);
+      text-decoration: none;
+      font-size: .84rem;
+      transition: color .2s;
+    }
+
+    .footer-col ul a:hover {
+      color: var(--green-mid);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      padding: 20px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: .79rem;
+      color: rgba(255, 255, 255, .38);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:960px) {
+      nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .about-grid,
+      .volunteer-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .programs-grid,
+      .events-grid,
+      .people-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .impact-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .tl-item,
+      .tl-item:nth-child(even) {
+        flex-direction: column;
+        padding-left: 50px;
+      }
+
+      .tl-dot {
+        left: 20px;
+      }
+
+      .tl-card,
+      .tl-item:nth-child(odd) .tl-card,
+      .tl-item:nth-child(even) .tl-card {
+        width: 100%;
+        margin: 0;
+      }
+    }
+
+    @media(max-width:600px) {
+
+      .programs-grid,
+      .people-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .impact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .values {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        gap: 24px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="#" class="logo-area">
+      <div class="logo-slot" id="logoSlot">
+        <span> <img src="https://raw.githubusercontent.com/bandhuar01-ngo/bondhungo/main/Bondhu_logo.png"
+            type="image/png"></span>
+      </div>
+      <input type="file" id="logoUpload" accept="image/*" style="display:none" onchange="handleLogoUpload(this)">
+      <div class="logo-text">
+        <h1>BONDHU</h1>
+        <span>Ramrajatala, Howrah</span>
+      </div>
+    </a>
+    <nav>
+      <a href="#home" class="nav-home">Home</a>
+      <a href="#about">About</a>
+      <a href="#programs">Programs</a>
+      <a href="#impact">Impact</a>
+      <a href="#events">Events</a>
+      <a href="#people">Stories</a>
+      <a href="#contact">Contact</a>
+      <a href="#volunteer" class="nav-join">Join Us</a>
+      <a href="#donate" class="nav-donate">
+        <i class="fas fa-hand-holding-heart"></i> Donate Now
+      </a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE NAV SIDEBAR -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()"></div>
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <span>BONDHU</span>
+      <button class="mobile-back-btn" onclick="closeMobileNav()" aria-label="Close">
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="#home" onclick="closeMobileNav()"> Home</a>
+      <a href="#about" onclick="closeMobileNav()">About</a>
+      <a href="#programs" onclick="closeMobileNav()">Programs</a>
+      <a href="#impact" onclick="closeMobileNav()">Impact</a>
+      <a href="#events" onclick="closeMobileNav()">Events</a>
+      <a href="#people" onclick="closeMobileNav()">Stories</a>
+      <a href="#contact" onclick="closeMobileNav()">Contact</a>
+      <a href="#volunteer" class="mobile-join-link" onclick="closeMobileNav()">Join Us</a>
+      <a href="#donate" class="mobile-donate-link" onclick="closeMobileNav()">
+        <i class="fas fa-hand-holding-heart"></i> Donate Now
+      </a>
+    </div>
+  </div>
+
+  <!-- DONATE MODAL -->
+  <div class="donate-modal-overlay" id="donateModal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="donate-modal">
+      <button class="donate-modal-close"
+        onclick="document.getElementById('donateModal').classList.remove('open')">&times;</button>
+      <h3>💚 Support Bondhu</h3>
+      <p>Your donation, however small, helps us serve more families in Howrah. Scan the QR code below to donate.</p>
+      <div class="qr-box">
+        <div class="qr-placeholder" id="donateQrArea">
+          <i class="fas fa-qrcode"></i>
+          <span>Scan to Donate</span>
+          <span style="font-size:0.7rem;color:var(--text-light);text-align:center;padding:0 10px;">Place your UPI QR
+            code image here</span>
+        </div>
+        <span class="qr-label">Scan &amp; Pay via UPI</span>
+      </div>
+      <div class="donate-upi">
+        UPI: <strong>bondhugroup2017@upi</strong>
+      </div>
+      <p style="margin-top:12px;margin-bottom:0;font-size:0.75rem;color:var(--text-light);">100% of donations go
+        directly to community welfare programs.</p>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <i class="fas fa-hands-holding-heart" style="font-size:13px;"></i>
+        Serving Community Since 2017
+      </div>
+      <h2>Together, We <em>Rise</em> &amp;<br><em>Build </em>a Better Tomorrow</h2>
+      <p><strong>
+          <font color="white">Bondhu</font>
+        </strong>— is a
+        community-driven NGO from Howrah, dedicated to empowering underprivileged lives through education, healthcare,
+        relief, and unity.</p>
+      <div class="hero-btns">
+        <a href="#volunteer" class="btn-primary"><i class="fas fa-hands-helping"></i> Volunteer With Us</a>
+        <a href="#events" class="btn-outline"><i class="fas fa-history"></i> Our Journey</a><a href="#donate"
+          class="btn-primary"><i class="fas fa-hand-holding-heart"></i> Donate Now
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="founded-glass">
+          <div class="glass-shine"></div>
+          <div class="founded-year">2017</div>
+          <div class="founded-lbl">Founded</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRASS ANIMATION -->
+    <div class="hero-grass" id="heroGrass"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-grid">
+      <div class="about-img-block">
+        <div class="img-placeholder">
+
+          <p>team photo </p>
+        </div>
+        <div class="about-corner"><span>2017</span>Est.</div>
+      </div>
+      <div class="about-content">
+        <span class="section-tag">About Us</span>
+        <h2 class="section-title">Who We Are</h2>
+        <p style="color:var(--text-mid);line-height:1.9;font-size:.96rem;">
+          <strong style="color:var(--green);">Bondhu</strong> — is a NGO based
+          in Ramrajatala, Howrah. Founded in 2017, we have been relentlessly working on the ground to uplift
+          marginalized communities through sustainable welfare programs and emergency relief.
+        </p>
+        <p style="color:var(--text-mid);line-height:1.9;font-size:.96rem;margin-top:14px;">
+          Our volunteers come from all walks of life, united by a single purpose: to be a true friend to those in need.
+          We believe compassion, when organized, can change the world.
+        </p>
+        <div class="values">
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-heart"></i></div>
+            <div>
+              <h4>Compassion</h4>
+              <p>We lead with empathy in every action we take.</p>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-users"></i></div>
+            <div>
+              <h4>Community</h4>
+              <p>Rooted in Howrah, growing together.</p>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
+            <div>
+              <h4>Integrity</h4>
+              <p>Transparent and accountable in all we do.</p>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-seedling"></i></div>
+            <div>
+              <h4>Sustainability</h4>
+              <p>Building lasting change, not just relief.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="programs" id="programs">
+    <div class="section-header">
+      <span class="section-tag">What We Do</span>
+      <h2 class="section-title">Our Programs</h2>
+      <p class="section-sub">From daily meals to emergency floods — we show up wherever we're needed most.</p>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card">
+        <div class="program-top p-orange">🍱</div>
+        <div class="program-body">
+          <h3>Food Distribution</h3>
+          <p>Regular food packets, hot meals, and ration drives for daily-wage workers and underprivileged families in
+            Howrah.</p>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-top p-green">📚</div>
+        <div class="program-body">
+          <h3>Education Support</h3>
+          <p>Distributing books, stationery, and school bags to underprivileged students. Enabling brighter futures one
+            child at a time.</p>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-top p-teal">🩺</div>
+        <div class="program-body">
+          <h3>Health Camps</h3>
+          <p>Free medical check-ups, blood donation drives, and health awareness programs improving community wellness.
+          </p>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-top p-cream">👕</div>
+        <div class="program-body">
+          <h3>Clothing Drive</h3>
+          <p>Collecting and distributing warm clothes, blankets, and essentials during winter and disaster situations.
+          </p>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-top p-yellow">🌊</div>
+        <div class="program-body">
+          <h3>Disaster Relief</h3>
+          <p>Rapid response to floods, cyclones, and calamities — providing emergency food, medicine, and shelter
+            materials.</p>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-top p-pink">💡</div>
+        <div class="program-body">
+          <h3>Awareness Campaigns</h3>
+          <p>Driving change through campaigns on women's rights, environment, and civic responsibilities across Howrah.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section class="impact" id="impact">
+    <div class="section-header">
+      <span class="section-tag">Our Impact</span>
+      <h2 class="section-title">Numbers That Speak</h2>
+      <p class="section-sub">Every number represents a life touched, a smile restored, and a community strengthened.</p>
+    </div>
+    <div class="impact-grid" id="impactGrid">
+      <div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,.5);padding:40px;">
+        <i class="fas fa-spinner fa-spin" style="font-size:1.6rem;"></i>
+        <p style="margin-top:12px;font-size:.9rem;">Loading impact data…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS TIMELINE -->
+  <section class="events" id="events">
+    <div class="section-header">
+      <span class="section-tag">Event History</span>
+      <h2 class="section-title">Our Journey in Events</h2>
+      <p class="section-sub">A timeline of milestones, drives, and moments that have defined Bondhu's mission across the
+        years.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item milestone">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-emoji">🎉</div>
+          <div class="tl-date">2017 — Founding</div>
+          <h3>Bondhu is Born</h3>
+          <p>A group of passionate young individuals in Ramrajatala came together with one dream — to be a true friend
+            to the community. Bondhu was officially founded.</p>
+          <span class="tl-tag">Milestone</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-emoji">🍚</div>
+          <div class="tl-date">2018 — First Drive</div>
+          <h3>First Food Distribution Drive</h3>
+          <p>Bondhu conducted its first formal food distribution, delivering meals and rations to over 80 daily-wage
+            families in the Ramrajatala locality.</p>
+          <span class="tl-tag">Food Relief</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-emoji">👕</div>
+          <div class="tl-date">November 2019</div>
+          <h3>Winter Clothing Drive</h3>
+          <p>Collected and distributed blankets, woolens, and warm clothing to over 150 people across Howrah ahead of
+            the winter season.</p>
+          <span class="tl-tag">Clothing</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-emoji">🦠</div>
+          <div class="tl-date">2020 — COVID Response</div>
+          <h3>Pandemic Relief Operations</h3>
+          <p>During the COVID-19 lockdowns, Bondhu distributed dry rations, masks, and sanitizers to hundreds of
+            vulnerable households in Howrah's most affected localities.</p>
+          <span class="tl-tag">Disaster Relief</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-emoji">🌀</div>
+          <div class="tl-date">May 2021 — Cyclone Yaas</div>
+          <h3>Cyclone Yaas Emergency Relief</h3>
+          <p>Mobilized within hours of Cyclone Yaas striking West Bengal — distributed food packets, tarpaulins, and
+            emergency kits to displaced families.</p>
+          <span class="tl-tag">Disaster Relief</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-emoji">📚</div>
+          <div class="tl-date">September 2022</div>
+          <h3>Books &amp; School Supplies Drive</h3>
+          <p>Supplied school books, bags, and stationery to 80+ underprivileged students ahead of the new academic year,
+            giving their education a fresh start.</p>
+          <span class="tl-tag">Education</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-emoji">👕</div>
+          <div class="tl-date">November 2022</div>
+          <h3>Winter Clothing Drive</h3>
+          <p>Distributed blankets, woolens, and warm clothing to over 300 people — our largest clothing drive to date.
+          </p>
+          <span class="tl-tag">Clothing</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-emoji">🌊</div>
+          <div class="tl-date">July 2023</div>
+          <h3>Flood Relief — Howrah Response</h3>
+          <p>Emergency response during the 2023 floods — dry food packets, drinking water, and medicines distributed to
+            flood-hit families across Howrah.</p>
+          <span class="tl-tag">Disaster Relief</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-emoji">🩺</div>
+          <div class="tl-date">December 2023</div>
+          <h3>Free Health Check-up Camp</h3>
+          <p>A free medical camp with local doctors, providing consultations, medicines, and health tests to 150+
+            residents in Ramrajatala.</p>
+          <span class="tl-tag">Healthcare</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-emoji">🍱</div>
+          <div class="tl-date">January 2024</div>
+          <h3>Winter Food Distribution Drive</h3>
+          <p>Distributed hot meals and food packets to over 200 families and daily-wage laborers in Ramrajatala and
+            nearby areas during peak winter.</p>
+          <span class="tl-tag">Food Relief</span>
+        </div>
+      </div>
+
+      <div class="tl-item milestone">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-emoji">🌟</div>
+          <div class="tl-date">2025 — Present</div>
+          <h3>Continuing the Mission</h3>
+          <p>Bondhu continues to grow — with new volunteers, new drives, and an expanding reach across Howrah. The
+            journey of friendship goes on.</p>
+          <span class="tl-tag">Milestone</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- PEOPLE HELPED / STORIES -->
+  <section class="people" id="people">
+    <div class="section-header">
+      <span class="section-tag">Voices From the Field</span>
+      <h2 class="section-title">People We've Walked With</h2>
+      <p class="section-sub">Real stories of community members whose lives have been touched by Bondhu's work.</p>
+    </div>
+    <div class="people-grid">
+      <div class="person-card">
+        <div class="person-avatar">👩</div>
+        <h4>Ram</h4>
+        <div class="role">Food Relief Beneficiary</div>
+        <p>"caption"</p>
+      </div>
+      <div class="person-card">
+        <div class="person-avatar">👦</div>
+        <h4>shyam</h4>
+        <div class="role">Education Program — Student</div>
+        <p>"cap."</p>
+      </div>
+      <div class="person-card">
+        <div class="person-avatar">👴</div>
+        <h4>jodu</h4>
+        <div class="role">Health Camp Attendee</div>
+        <p>"cap"</p>
+      </div>
+      
+  </section>
+
+  <!-- VOLUNTEER -->
+  <section class="volunteer" id="volunteer">
+    <div class="volunteer-grid">
+      <div class="vol-info">
+        <span class="section-tag">Join Bondhu</span>
+        <h2 class="section-title">Be a Friend.<br>Be a Volunteer.</h2>
+        <p style="color:var(--text-mid);line-height:1.9;font-size:.96rem;">
+          We are always looking for compassionate individuals who want to make a real difference. Whether you have a few
+          hours or a full weekend — there's always a way to serve with Bondhu.
+        </p>
+        <div class="vol-perks">
+          <div class="perk-item">
+            <div class="perk-icon"><i class="fas fa-certificate"></i></div>
+            <div>
+              <h4>Volunteer Certificate</h4>
+              <p>Receive an official certificate recognizing your service with Bondhu.</p>
+            </div>
+          </div>
+          <div class="perk-item">
+            <div class="perk-icon"><i class="fas fa-users"></i></div>
+            <div>
+              <h4>Community Network</h4>
+              <p>Be part of a passionate, growing network of changemakers in Howrah.</p>
+            </div>
+          </div>
+          <div class="perk-item">
+            <div class="perk-icon"><i class="fas fa-heart"></i></div>
+            <div>
+              <h4>Real Impact</h4>
+              <p>Every hour you give directly touches a life in our community.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vol-form-wrap"
+        style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:24px;">
+        <div style="font-size:3.5rem;">🤝</div>
+        <h3 style="font-family:var(--font-head);font-size:1.6rem;color:var(--text-dark);">Ready to Make a Difference?
+        </h3>
+        <p style="color:var(--text-mid);line-height:1.85;font-size:.96rem;max-width:340px;">Fill out our volunteer
+          registration form and become part of the Bondhu family. It only takes a few minutes!</p>
+        <a href="https://forms.gle/bondhu-volunteer" target="_blank" rel="noopener" class="btn-primary"
+          style="font-size:1.05rem;padding:16px 40px;">
+          <i class="fas fa-paper-plane"></i> Register as Volunteer
+        </a>
+        <p style="font-size:.78rem;color:var(--text-light);"><i class="fas fa-external-link-alt"
+            style="font-size:.7rem;"></i> Opens registration form in a new tab</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DONATE BANNER -->
+  <div class="donate-banner" id="donate">
+    <div id="heartsContainer" aria-hidden="true"></div>
+    <h2>Every Rupee Finds a Home</h2>
+    <p>Your donation directly funds food drives, health camps, and relief operations for communities in Howrah.</p>
+    <div class="donate-qr-wrap">
+      <img src="https://raw.githubusercontent.com/bandhuar01-ngo/bondhungo/main/qr_code.jpeg"
+        alt="Donate via QR Code – Bondhu NGO">
+      <div class="donate-qr-msg">
+        <h4>Scan &amp; Donate Instantly</h4>
+        <p>Point your camera at the QR code to donate securely via UPI. Every rupee goes directly to our community
+          programs for indeed people.</p>
+        <p>
+          <strong>Please send a screenshot on this number to collect Receipt</strong><br>
+          <a href="https://wa.me/918336012877" target="_blank">+91 83360 12877</a>
+        </p>
+        <span class="qr-upi"><i class="fas fa-lock" style="font-size:.7rem;margin-right:5px;"></i> Secure UPI
+          Payment</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-header">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">Contact Bondhu</h2>
+      <p class="section-sub">Reach out to volunteer, donate, or partner with us. We'd love to hear from you.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>We're Here For You</h3>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <h4>Address</h4>
+            <p>Ramrajatala, Howrah<br>West Bengal, India</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <h4>Phone</h4>
+            <a href="tel:+918336012877">+91 83360 12877</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:bondhugroup2017@gmail.com">bondhugroup2017@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-clock"></i></div>
+          <div>
+            <h4>Availability</h4>
+            <p>Monday – Saturday: 10 AM – 6 PM<br>Sunday: Drive Days (Field Work)</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="map-wrap">
+          <i class="fas fa-map-marked-alt"></i>
+          <strong>Ramrajatala, Howrah</strong>
+          <span style="font-size:.79rem;color:var(--text-light);padding:0 20px;">Embed Google Maps iframe here by
+            replacing this block</span>
+          <a href="https://maps.google.com/?q=Ramrajatala,Howrah" target="_blank" class="btn-outline"
+            style="margin-top:8px;color:var(--green);border-color:var(--green);font-size:.82rem;padding:9px 22px;">
+            <i class="fas fa-external-link-alt"></i> Open in Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:13px;margin-bottom:4px;">
+          <div class="logo-slot" style="width:46px;height:65px;font-size:9px;border-radius:9px;pointer-events:none;">
+            <span><img src="https://raw.githubusercontent.com/bandhuar01-ngo/bondhungo/main/Bondhu_logo.png"
+                type="image/png"></span>
+          </div>
+          <div>
+            <div style="font-family:var(--font-head);font-size:1.4rem;font-weight:700;color:#fff;letter-spacing:1px;">
+              BONDHU</div>
+            <div style="font-size:.68rem;color:rgba(255,255,255,.45);letter-spacing:2px;">RAMRAJATALA, HOWRAH</div>
+          </div>
+        </div>
+        <p>A friend to the community — dedicated to uplifting lives through compassion, action, and unity since 2017.
+        </p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/Bondhu17.net" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/bondhu.ngo/" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://m.youtube.com/channel/UCSjns_VKSkbjcg2F-0sbLSw?fbclid=IwVERTSARMew1leHRuA2FlbQIxMABzcnRjBmFwcF9pZAwzNTA2ODU1MzE3MjgAAR4mqxDK85hq11aSSxLtRnN5_pBz65W7KJgXZJaVwyryIZuSKbEMVNp-TByZhw_aem_coVciIbJ7c_9xQEi0spLzg&sfnsn=wiwspwa/"
+            title="Youtube"><i class="fab fa-youtube"></i></a>
+          <a href="mailto:bondhugroup2017@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="tel:+918336012877" title="Call Us"><i class="fas fa-phone"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#programs">Our Programs</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#events">Event History</a></li>
+          <li><a href="#people">Stories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="#volunteer">Become a Volunteer</a></li>
+          <li><a href="#donate">Donate Now</a></li>
+
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+918336012877">+91 83360 12877</a></li>
+          <li><a href="mailto:bondhugroup2017@gmail.com">bondhugroup2017@gmail.com</a></li>
+          <li><a>Ramrajatala, Howrah</a></li>
+          <li><a>West Bengal, India</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="footerYear"></span> Bondhu NGO | <a href=""> Terms and conditions</a> </span> <span
+        align="left"> Associated with <a href="https://arnetworkhouse.in/">
+          <font color="skyblue"> AR Network House</font>
+        </a></span>
+      <span>Serving with 💕 since 2017 </span>
+    </div>
+  </footer>
+
+  <!-- FLOATING HOME BUTTON -->
+  <a href="#home" class="floating-home-btn" id="floatingHomeBtn" title="Back to Top">
+    <p> ⌂</p>
+  </a>
+
+  <script>
+    /* ── FLOATING HOME BUTTON VISIBILITY ── */
+    const floatingHomeBtn = document.getElementById('floatingHomeBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        floatingHomeBtn.classList.add('visible');
+      } else {
+        floatingHomeBtn.classList.remove('visible');
+      }
+    });
+  </script>
+
+  <script>
+    /* ── FOOTER YEAR ── */
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    /* ── FALLING HEARTS ── */
+    (function spawnHearts() {
+      const container = document.getElementById('heartsContainer');
+      const hearts = ['❤️', '🧡', '💛', '💖', '💕'];
+      function spawn() {
+        const el = document.createElement('span');
+        el.className = 'donate-heart';
+        el.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        const size = 1.1 + Math.random() * 1.4;
+        const dur = 5 + Math.random() * 7;
+        el.style.left = Math.random() * 100 + '%';
+        el.style.fontSize = size + 'rem';
+        el.style.animationDuration = dur + 's';
+        el.style.animationDelay = (Math.random() * 4) + 's';
+        container.appendChild(el);
+        setTimeout(() => el.remove(), (dur + 4) * 1000);
+      }
+      // Initial batch
+      for (let i = 0; i < 12; i++) spawn();
+      setInterval(spawn, 700);
+    })();
+
+    /* ── MOBILE NAV TOGGLE ── */
+    function toggleMobileNav() {
+      const nav = document.getElementById('mobileNav');
+      const overlay = document.getElementById('mobileNavOverlay');
+      nav.classList.toggle('open');
+      overlay.classList.toggle('open');
+    }
+
+    function closeMobileNav() {
+      document.getElementById('mobileNav').classList.remove('open');
+      document.getElementById('mobileNavOverlay').classList.remove('open');
+    }
+
+    // Close on outside click handled by overlay onclick
+
+    /* ── LOGO UPLOAD ── */
+    function handleLogoUpload(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const slot = document.getElementById('logoSlot');
+        slot.innerHTML = `<img src="${e.target.result}" alt="Logo">`;
+        document.querySelectorAll('.logo-slot').forEach(s => {
+          if (s !== slot) s.innerHTML = `<img src="${e.target.result}" alt="Logo">`;
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+
+
+    const IMPACT_URL = 'https://script.google.com/macros/s/AKfycbwaiCo68XVMyLo3JLCc7yIJGh1snKVj4EDz3VlRMCQDfi-AlPOrDs186EiF0j3as89n/exec';
+
+    // Counting animation
+    function animateCount(el, target, duration) {
+      const start = performance.now();
+      const update = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // ease-out cubic
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(ease * target);
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(update);
+    }
+
+    function triggerCountAnimations() {
+      document.querySelectorAll('.impact-card[data-target]').forEach(card => {
+        const el = card.querySelector('.count-num');
+        const target = parseInt(card.dataset.target);
+        if (el && !isNaN(target)) animateCount(el, target, 1800);
+      });
+    }
+
+    // Use IntersectionObserver so animation fires when section scrolls into view
+    function setupObserver() {
+      const section = document.getElementById('impact');
+      if (!section) return;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            triggerCountAnimations();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(section);
+    }
+
+    function renderImpactCards(items) {
+      const grid = document.getElementById('impactGrid');
+      grid.innerHTML = items.map(({ label, numStr }) => {
+        // Parse "500+", "15+", "200" etc → digits + suffix
+        const match = String(numStr).match(/^([\d,]+)(.*)$/);
+        const digits = match ? parseInt(match[1].replace(/,/g, '')) : 0;
+        const suffix = match ? match[2].trim() : '';
+        return `
+          <div class="impact-card" data-target="${digits}">
+            <div class="num"><span class="count-num">0</span><span class="unit">${suffix}</span></div>
+            <p>${label}</p>
+          </div>`;
+      }).join('');
+      setupObserver();
+    }
+
+    async function loadImpact() {
+      const grid = document.getElementById('impactGrid');
+      const FALLBACK = [
+        { label: 'Families helped through food &amp; relief distribution', numStr: '+' },
+        { label: 'Children supported with education supplies', numStr: '200+' },
+        { label: 'Health camps organized with free medical check-ups', numStr: '15+' },
+        { label: 'Active volunteers serving across Howrah', numStr: '50+' },
+      ];
+
+      try {
+        const res = await fetch(IMPACT_URL, { cache: 'no-store' });
+        const text = await res.text();
+        let data;
+        try { data = JSON.parse(text); } catch (e) { throw new Error('Non-JSON response'); }
+
+        // Normalise: [[label,num],...] from Apps Script, or flat object fallback
+        let raw;
+        if (Array.isArray(data)) {
+          raw = data;
+        } else if (data.values || data.data || data.rows) {
+          raw = data.values || data.data || data.rows;
+        } else if (typeof data === 'object' && data !== null) {
+          const labelMap = {
+            families: 'Families Helped', children: 'Children Supported',
+            camps: 'Health Camps', volunteers: 'Active Volunteers'
+          };
+          raw = Object.entries(data).map(([k, v]) => [labelMap[k] || k, v]);
+        } else {
+          raw = [];
+        }
+        if (!raw.length) throw new Error('Empty data');
+
+        const items = raw.map(row => {
+          let label, numStr;
+          if (Array.isArray(row)) {
+            // Col A = label or number — detect which is which
+            // If row[1] looks like a number, A=label B=number; else swap
+            if (/^\d/.test(String(row[1]))) {
+              label = String(row[0]); numStr = String(row[1]);
+            } else if (/^\d/.test(String(row[0]))) {
+              numStr = String(row[0]); label = String(row[1]);
+            } else {
+              label = String(row[0]); numStr = String(row[1]);
+            }
+          } else {
+            label = row.label || row.description || row.A || row.a || '';
+            numStr = String(row.number || row.value || row.B || row.b || '0');
+          }
+          return { label: label.trim(), numStr: numStr.trim() };
+        }).filter(r => r.label && r.numStr);
+
+        if (!items.length) throw new Error('No parseable rows');
+        renderImpactCards(items);
+      } catch (e) {
+        console.warn('Impact fetch failed, using fallback:', e.message);
+        renderImpactCards(FALLBACK);
+      }
+    }
+
+    /* ── LOAD IMPACT DATA ── */
+    document.addEventListener('DOMContentLoaded', loadImpact);
+
+    /* ── GRASS BLADES ── */
+    (function generateGrass() {
+      const container = document.getElementById('heroGrass');
+      if (!container) return;
+      const colors = ['#2d8a4e', '#38b06c', '#1e6b3a', '#4ec97a', '#236640', '#52c97e', '#1a5c33'];
+      const count = 60;
+      for (let i = 0; i < count; i++) {
+        const blade = document.createElement('div');
+        blade.className = 'grass-blade';
+        const h = 22 + Math.random() * 36;
+        const w = 4 + Math.random() * 4;
+        const left = (i / count) * 100 + (Math.random() - 0.5) * 2;
+        const dur = (1.6 + Math.random() * 1.8).toFixed(2);
+        const delay = (Math.random() * 2).toFixed(2);
+        const leanL = -(5 + Math.random() * 14).toFixed(1);
+        const leanR = (5 + Math.random() * 14).toFixed(1);
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        blade.style.cssText = `
+        left:${left}%;
+        height:${h}px;
+        width:${w}px;
+        background:${color};
+        --dur:${dur}s;
+        --delay:${delay}s;
+        --lean-l:${leanL}deg;
+        --lean-r:${leanR}deg;
+        animation-delay:${delay}s;
+        opacity:${0.7 + Math.random() * 0.3};
+      `;
+        container.appendChild(blade);
+      }
+    })();
+
+
+  </script>
+</body>
+
+</html>

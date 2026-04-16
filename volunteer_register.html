@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register as a Volunteer – Bondhu NGO</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/bandhuar01-ngo/bondhungo/main/Bondhu_logo.png"
+    type="image/png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --green: #1b6e3f;
+      --green-dark: #0f4527;
+      --green-mid: #258a50;
+      --green-pale: #e9f5ee;
+      --green-faint: #f3faf5;
+      --orange: #d97726;
+      --orange-light: #f5a623;
+      --cream: #fdf6ec;
+      --cream-dark: #f5ead6;
+      --text-dark: #1a2e1e;
+      --text-mid: #4a5a4e;
+      --text-light: #7a8e7e;
+      --white: #ffffff;
+      --border: #d5e8da;
+      --radius: 14px;
+      --shadow: 0 8px 32px rgba(27, 110, 63, 0.10);
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background: var(--green-faint);
+      min-height: 100vh;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: var(--green-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 16px rgba(0, 0, 0, 0.22);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+      text-decoration: none;
+    }
+
+    .logo-slot {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      overflow: hidden;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .logo-text h1 {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .logo-text span {
+      font-size: 0.68rem;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-back {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-size: 0.80rem;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: .2s;
+    }
+
+    .nav-back:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    /* HERO STRIP */
+    .hero-strip {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, var(--green-mid) 100%);
+      padding: 48px 5% 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-strip h2 {
+      font-family: var(--font-head);
+      font-size: 2.2rem;
+      color: #fff;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .hero-strip p {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1rem;
+      position: relative;
+    }
+
+    .step-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-top: 28px;
+      position: relative;
+    }
+
+    .step-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.7);
+      transition: .3s;
+    }
+
+    .step-dot.active {
+      background: var(--orange);
+      border-color: var(--orange-light);
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(217, 119, 38, 0.3);
+    }
+
+    .step-dot.done {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: #fff;
+      color: #fff;
+    }
+
+    .step-line {
+      width: 60px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .step-line.done {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .step-labels {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 8px;
+    }
+
+    .step-label {
+      width: 34px;
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+    }
+
+    .step-label+.step-line-gap {
+      width: 60px;
+    }
+
+    /* MAIN LAYOUT */
+    .main-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 20px 60px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* RULES SIDEBAR */
+    .rules-sidebar {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      position: sticky;
+      top: 90px;
+    }
+
+    .rules-sidebar h3 {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      color: var(--green-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rules-sidebar h3 i {
+      color: var(--orange);
+      font-size: 0.95rem;
+    }
+
+    .rule-item {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+
+    .rule-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--green-pale);
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .rule-text {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    .rule-divider {
+      border: none;
+      border-top: 1px dashed var(--border);
+      margin: 16px 0;
+    }
+
+    .pledge-box {
+      background: var(--green-pale);
+      border-radius: 10px;
+      padding: 14px;
+      border-left: 3px solid var(--green);
+    }
+
+    .pledge-box p {
+      font-size: 0.8rem;
+      color: var(--green-dark);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* FORM CARD */
+    .form-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .form-section {
+      display: none;
+      padding: 36px 40px;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      color: var(--green-dark);
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      margin-bottom: 28px;
+    }
+
+    /* INPUTS */
+    .field-group {
+      margin-bottom: 20px;
+    }
+
+    .field-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      margin-bottom: 7px;
+      letter-spacing: 0.3px;
+    }
+
+    .field-group label span.req {
+      color: var(--orange);
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      font-size: 0.88rem;
+    }
+
+    .input-wrap input,
+    .input-wrap select,
+    .input-wrap textarea {
+      width: 100%;
+      padding: 13px 16px 13px 40px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      background: var(--white);
+      transition: .2s;
+      outline: none;
+    }
+
+    .input-wrap textarea {
+      padding-top: 13px;
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .input-wrap input:focus,
+    .input-wrap select:focus,
+    .input-wrap textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(27, 110, 63, 0.1);
+    }
+
+    .input-wrap input.error {
+      border-color: #e53e3e;
+    }
+
+    .field-error {
+      font-size: 0.76rem;
+      color: #e53e3e;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .field-error.show {
+      display: block;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .radio-row {
+      display: flex;
+      gap: 10px;
+      padding: 4px 0;
+      flex-wrap: wrap;
+    }
+
+    .radio-opt {
+      cursor: pointer;
+    }
+
+    .radio-opt input[type=radio] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .radio-opt span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      transition: .2s;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .radio-opt span::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: .2s;
+      flex-shrink: 0;
+    }
+
+    .radio-opt input[type=radio]:checked+span {
+      border-color: var(--green);
+      background: var(--green-pale);
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+
+    .radio-opt input[type=radio]:checked+span::before {
+      background: var(--green);
+    }
+
+    .radio-opt:hover span {
+      border-color: var(--green-mid);
+      color: var(--green);
+    }
+
+    /* OTP BOX */
+    .otp-sent-info {
+      background: var(--green-pale);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .otp-sent-info p {
+      font-size: 0.85rem;
+      color: var(--green-dark);
+    }
+
+    .otp-sent-info strong {
+      color: var(--green);
+    }
+
+    .otp-inputs {
+      display: flex;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .otp-inputs input {
+      width: 52px;
+      height: 56px;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      color: var(--green-dark);
+      outline: none;
+      transition: .2s;
+      font-family: var(--font-body);
+    }
+
+    .otp-inputs input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(27, 110, 63, 0.1);
+    }
+
+    .otp-inputs input.filled {
+      border-color: var(--green-mid);
+      background: var(--green-pale);
+    }
+
+    .resend-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .resend-btn {
+      background: none;
+      border: none;
+      color: var(--green);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .resend-btn:disabled {
+      color: var(--text-light);
+      text-decoration: none;
+      cursor: default;
+    }
+
+    .timer-text {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    /* BUTTONS */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 36px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .25s;
+      letter-spacing: 0.3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(27, 110, 63, 0.35);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--green);
+      border: 1.5px solid var(--green);
+      border-radius: 50px;
+      padding: 13px 28px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--green-pale);
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border);
+    }
+
+    /* TAGS for areas of interest */
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .tag-opt {
+      padding: 7px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      color: var(--text-mid);
+      transition: .2s;
+      background: var(--white);
+    }
+
+    .tag-opt:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .tag-opt.selected {
+      background: var(--green-pale);
+      border-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+
+    /* SUCCESS PAGE */
+    #successPage {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: var(--green-faint);
+      overflow: hidden;
+    }
+
+    .success-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--green-mid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      margin-bottom: 28px;
+      box-shadow: 0 12px 40px rgba(27, 110, 63, 0.35);
+      animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+
+    .success-inner h2 {
+      font-family: var(--font-head);
+      font-size: 2.2rem;
+      color: var(--green-dark);
+      margin-bottom: 12px;
+      animation: fadeUp 0.6s 0.2s both;
+    }
+
+    .success-inner p {
+      font-size: 1rem;
+      color: var(--text-mid);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 10px;
+      animation: fadeUp 0.6s 0.35s both;
+    }
+
+    .success-inner .applicant-name {
+      font-family: var(--font-head);
+      font-style: italic;
+      color: var(--green);
+      font-size: 1.1rem;
+    }
+
+    .mail-note {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 16px 24px;
+      margin-top: 20px;
+      border: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      animation: fadeUp 0.6s 0.5s both;
+      max-width: 440px;
+    }
+
+    .mail-note i {
+      color: var(--orange);
+      margin-right: 6px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .home-link {
+      margin-top: 24px;
+      animation: fadeUp 0.6s 0.65s both;
+    }
+
+    .home-link a {
+      background: var(--green-dark);
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: .2s;
+    }
+
+    .home-link a:hover {
+      background: var(--green);
+    }
+
+    /* FALLING HEARTS */
+    .hearts-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .falling-heart {
+      position: absolute;
+      top: -60px;
+      animation: fallDown linear forwards;
+      opacity: 0.85;
+      user-select: none;
+    }
+
+    @keyframes fallDown {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.9;
+      }
+
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* LOADING SPINNER */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--green-dark);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      z-index: 9999;
+      transition: .3s;
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast.error {
+      background: #c53030;
+    }
+
+    /* SECTION HEADER inside form */
+    .form-part-header {
+      background: var(--green-pale);
+      margin: -36px -40px 28px;
+      padding: 18px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-part-header h3 {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      color: var(--green-dark);
+    }
+
+    .form-part-header p {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 3px;
+    }
+
+    /* Responsive */
+    @media(max-width:800px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+        padding: 16px 12px 40px;
+      }
+
+      .rules-sidebar {
+        position: static;
+      }
+
+      .form-section {
+        padding: 20px 16px;
+      }
+
+      .form-part-header {
+        margin: -20px -16px 20px;
+        padding: 14px 16px;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-row {
+        flex-direction: column-reverse;
+      }
+
+      .btn-row .btn-primary,
+      .btn-row .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .otp-inputs {
+        gap: 8px;
+      }
+
+      .otp-inputs input {
+        width: 42px;
+        height: 48px;
+        font-size: 1.2rem;
+      }
+
+      .hero-strip h2 {
+        font-size: 1.6rem;
+      }
+
+      .hero-strip {
+        padding: 30px 16px 28px;
+      }
+
+      .logo-text h1 {
+        font-size: 1.2rem;
+      }
+
+      .radio-row {
+        gap: 8px;
+      }
+
+      .radio-opt span {
+        padding: 7px 14px;
+        font-size: 0.84rem;
+      }
+
+      .tag-opt {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+
+      .success-inner h2 {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media(max-width:400px) {
+      .otp-inputs input {
+        width: 36px;
+        height: 42px;
+        font-size: 1.1rem;
+      }
+
+      .otp-inputs {
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="bondhu.html" class="logo-area">
+      <div class="logo-slot">
+        <img src="https://raw.githubusercontent.com/bandhuar01-ngo/bondhungo/main/Bondhu_logo.png" alt="Bondhu"
+          onerror="this.parentElement.innerHTML='🌿'">
+      </div>
+      <div class="logo-text">
+        <h1>Bondhu</h1>
+        <span>Together We Rise</span>
+      </div>
+    </a>
+    <a href="bondhu.html" class="nav-back"><i class="fas fa-arrow-left"></i> Back </a>
+  </header>
+
+  <!-- HERO STRIP -->
+  <div class="hero-strip">
+    <h2>Register as a Volunteer</h2>
+    <p>Join our family of changemakers. Every hand that helps, every heart that cares — together we rise.</p>
+    <div class="step-dots" id="stepDots">
+      <div class="step-dot active" id="dot1">1</div>
+      <div class="step-line" id="line1"></div>
+      <div class="step-dot" id="dot2">2</div>
+      <div class="step-line" id="line2"></div>
+      <div class="step-dot" id="dot3">3</div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:0;margin-top:8px;">
+      <div style="width:34px;font-size:0.6rem;color:rgba(255,255,255,0.6);text-align:center;">Info</div>
+      <div style="width:60px;"></div>
+      <div style="width:34px;font-size:0.6rem;color:rgba(255,255,255,0.6);text-align:center;">Verify</div>
+      <div style="width:60px;"></div>
+      <div style="width:34px;font-size:0.6rem;color:rgba(255,255,255,0.6);text-align:center;">Profile</div>
+    </div>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="main-layout">
+
+    <!-- LEFT: RULES SIDEBAR -->
+    <aside class="rules-sidebar">
+      <h3><i class="fas fa-scroll"></i> Rules & Regulations</h3>
+      <div class="rule-item">
+        <div class="rule-num">1</div>
+        <div class="rule-text">Volunteers must be 16 years of age or older to register.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">2</div>
+        <div class="rule-text">All personal information provided must be accurate and verifiable.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">3</div>
+        <div class="rule-text">Volunteers are expected to maintain dignity, respect, and discipline at all times.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">4</div>
+        <div class="rule-text">Participation in activities is subject to availability and organizational needs.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">5</div>
+        <div class="rule-text">Sensitive information shared during service must be kept strictly confidential.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">6</div>
+        <div class="rule-text">Misconduct or violation of community guidelines may lead to removal.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">7</div>
+        <div class="rule-text">Bondhu reserves the right to verify ID proof and contact details submitted.</div>
+      </div>
+      <hr class="rule-divider">
+      <div class="pledge-box">
+        <p>"I pledge to serve with honesty, compassion, and dedication — for a better community, together."</p>
+      </div>
+    </aside>
+
+    <!-- RIGHT: FORM CARD -->
+    <div class="form-card">
+
+      <!-- STEP 1: Basic Info -->
+      <div class="form-section active" id="step1">
+        <div class="form-part-header">
+          <h3><i class="fas fa-user-circle" style="color:var(--green);margin-right:8px;"></i>Step 1 — Basic Information
+          </h3>
+          <p>We'll send a verification code to your email before proceeding.</p>
+        </div>
+
+        <div class="field-group">
+          <label>Full Name <span class="req">*</span></label>
+          <div class="input-wrap">
+            <i class="fas fa-user"></i>
+            <input type="text" id="f_name" placeholder="Your full name">
+          </div>
+          <div class="field-error" id="err_name">Please enter your name.</div>
+        </div>
+
+        <div class="two-col">
+          <div class="field-group">
+            <label>Phone Number <span class="req">*</span></label>
+            <div class="input-wrap">
+              <i class="fas fa-phone"></i>
+              <input type="tel" id="f_phone" placeholder="+91 XXXXX XXXXX">
+            </div>
+            <div class="field-error" id="err_phone">Enter a valid 10-digit phone number.</div>
+          </div>
+          <div class="field-group">
+            <label>Email Address <span class="req">*</span></label>
+            <div class="input-wrap">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="f_email" placeholder="your@email.com">
+            </div>
+            <div class="field-error" id="err_email">Enter a valid email address.</div>
+          </div>
+        </div>
+
+        <div class="btn-row" style="border-top:none;padding-top:4px;">
+          <button class="btn-primary" id="sendOtpBtn" onclick="sendOTP()">
+            Send Verification Code &nbsp;<span class="spinner" id="otpSpinner"></span><i class="fas fa-arrow-right"
+              id="otpArrow"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: OTP Verification -->
+      <div class="form-section" id="step2">
+        <div class="form-part-header">
+          <h3><i class="fas fa-shield-alt" style="color:var(--green);margin-right:8px;"></i>Step 2 — Verify Your Email
+          </h3>
+          <p>Enter the 6-digit code sent to your inbox.</p>
+        </div>
+
+        <div class="otp-sent-info" id="otpSentInfo">
+          <p>A verification code has been sent to <strong id="emailDisplay"></strong>. Please check your inbox (and spam
+            folder).</p>
+        </div>
+
+        <div class="field-group" style="margin-top:16px;">
+          <label>Enter OTP <span class="req">*</span></label>
+          <div class="otp-inputs" id="otpInputs">
+            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
+            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
+            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
+            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
+            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
+            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
+          </div>
+          <div class="field-error" id="err_otp">Incorrect OTP. Please try again.</div>
+        </div>
+
+        <div class="resend-row">
+          <button class="resend-btn" id="resendBtn" disabled onclick="resendOTP()">Resend Code</button>
+          <span class="timer-text" id="timerText">Resend in <span id="countdown">60</span>s</span>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-secondary" onclick="goStep(1)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button class="btn-primary" id="verifyBtn" onclick="verifyOTP()">
+            Verify &amp; Continue &nbsp;<span class="spinner" id="verifySpinner"></span><i class="fas fa-check"
+              id="verifyArrow"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Full Form -->
+      <div class="form-section" id="step3">
+        <div class="form-part-header">
+          <h3><i class="fas fa-clipboard-list" style="color:var(--green);margin-right:8px;"></i>Step 3 — Complete Your
+            Profile</h3>
+          <p>Help us know you better so we can place you where you shine.</p>
+        </div>
+
+        <!-- Personal Details -->
+        <div
+          style="margin-bottom:8px;font-size:0.78rem;font-weight:700;color:var(--orange);letter-spacing:1px;text-transform:uppercase;">
+          Personal Details</div>
+
+        <div class="two-col">
+          <div class="field-group">
+            <label>Date of Birth <span class="req">*</span></label>
+            <div class="input-wrap">
+              <i class="fas fa-birthday-cake"></i>
+              <input type="date" id="f_dob">
+            </div>
+            <div class="field-error" id="err_dob">Required.</div>
+          </div>
+          <div class="field-group">
+            <label>Gender <span class="req">*</span></label>
+            <div class="radio-row" style="margin-top:6px;">
+              <label class="radio-opt"><input type="radio" name="gender" value="Male"><span>Male</span></label>
+              <label class="radio-opt"><input type="radio" name="gender" value="Female"><span>Female</span></label>
+              <label class="radio-opt"><input type="radio" name="gender" value="Other"><span>Other</span></label>
+            </div>
+            <div class="field-error" id="err_gender">Please select gender.</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Address <span class="req">*</span></label>
+          <div class="two-col" style="margin-bottom:12px;">
+            <div class="field-group" style="margin-bottom:0;">
+              <label style="font-size:0.78rem;">House / Flat No. <span class="req">*</span></label>
+              <div class="input-wrap">
+                <i class="fas fa-home"></i>
+                <input type="text" id="f_house" placeholder="e.g. 42B, Block C">
+              </div>
+            </div>
+            <div class="field-group" style="margin-bottom:0;">
+              <label style="font-size:0.78rem;">Locality / Street <span class="req">*</span></label>
+              <div class="input-wrap">
+                <i class="fas fa-road"></i>
+                <input type="text" id="f_locality" placeholder="e.g. Park Street">
+              </div>
+            </div>
+          </div>
+          <div class="two-col" style="margin-bottom:12px;">
+            <div class="field-group" style="margin-bottom:0;">
+              <label style="font-size:0.78rem;">Area / Town <span class="req">*</span></label>
+              <div class="input-wrap">
+                <i class="fas fa-map-pin"></i>
+                <input type="text" id="f_area" placeholder="e.g. Behala, Salt Lake">
+              </div>
+            </div>
+            <div class="field-group" style="margin-bottom:0;">
+              <label style="font-size:0.78rem;">District <span class="req">*</span></label>
+              <div class="input-wrap">
+                <i class="fas fa-city"></i>
+                <input type="text" id="f_district" placeholder="e.g. Kolkata, Howrah">
+              </div>
+            </div>
+          </div>
+          <div class="two-col" style="margin-bottom:4px;">
+            <div class="field-group" style="margin-bottom:0;">
+              <label style="font-size:0.78rem;">State <span class="req">*</span></label>
+              <div class="input-wrap">
+                <i class="fas fa-map"></i>
+                <select id="f_state">
+                  <option value="">Select State</option>
+                  <option>Andhra Pradesh</option>
+                  <option>Arunachal Pradesh</option>
+                  <option>Assam</option>
+                  <option>Bihar</option>
+                  <option>Chhattisgarh</option>
+                  <option>Goa</option>
+                  <option>Gujarat</option>
+                  <option>Haryana</option>
+                  <option>Himachal Pradesh</option>
+                  <option>Jharkhand</option>
+                  <option>Karnataka</option>
+                  <option>Kerala</option>
+                  <option>Madhya Pradesh</option>
+                  <option>Maharashtra</option>
+                  <option>Manipur</option>
+                  <option>Meghalaya</option>
+                  <option>Mizoram</option>
+                  <option>Nagaland</option>
+                  <option>Odisha</option>
+                  <option>Punjab</option>
+                  <option>Rajasthan</option>
+                  <option>Sikkim</option>
+                  <option>Tamil Nadu</option>
+                  <option>Telangana</option>
+                  <option>Tripura</option>
+                  <option>Uttar Pradesh</option>
+                  <option>Uttarakhand</option>
+                  <option selected>West Bengal</option>
+                  <option>Delhi</option>
+                  <option>Jammu &amp; Kashmir</option>
+                  <option>Ladakh</option>
+                  <option>Puducherry</option>
+                  <option>Chandigarh</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-group" style="margin-bottom:0;">
+              <label style="font-size:0.78rem;">Landmark <span
+                  style="color:var(--text-light);font-weight:400;">(optional)</span></label>
+              <div class="input-wrap">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" id="f_landmark" placeholder="e.g. Near City Hospital">
+              </div>
+            </div>
+          </div>
+          <div class="field-error" id="err_address">Please fill all required address fields.</div>
+        </div>
+
+        <!-- ID Proof -->
+        <div
+          style="margin:20px 0 8px;font-size:0.78rem;font-weight:700;color:var(--orange);letter-spacing:1px;text-transform:uppercase;">
+          Identity Verification</div>
+
+        <div class="two-col">
+          <div class="field-group">
+            <label>ID Type <span class="req">*</span></label>
+            <div class="input-wrap">
+              <i class="fas fa-id-card"></i>
+              <select id="f_idtype">
+                <option value="">Select ID type</option>
+                <option>Aadhaar Card</option>
+                <option>Voter ID</option>
+                <option>PAN Card</option>
+                <option>Passport</option>
+                <option>Driving Licence</option>
+              </select>
+            </div>
+            <div class="field-error" id="err_idtype">Please select an ID type.</div>
+          </div>
+          <div class="field-group">
+            <label>ID Number <span class="req">*</span></label>
+            <div class="input-wrap">
+              <i class="fas fa-hashtag"></i>
+              <input type="text" id="f_idnum" placeholder="Enter your ID number">
+            </div>
+            <div class="field-error" id="err_idnum">Please enter your ID number.</div>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div
+          style="margin:20px 0 8px;font-size:0.78rem;font-weight:700;color:var(--orange);letter-spacing:1px;text-transform:uppercase;">
+          Experience & Interests</div>
+
+        <div class="field-group">
+          <label>Current Occupation / Studies</label>
+          <div class="input-wrap">
+            <i class="fas fa-briefcase"></i>
+            <select id="f_occupation">
+              <option value="">Select your occupation</option>
+              <option>Student (School)</option>
+              <option>Student (College / University)</option>
+              <option>Teacher / Educator</option>
+              <option>Doctor / Medical Professional</option>
+              <option>Engineer / Technical Professional</option>
+              <option>Government Employee</option>
+              <option>Private Sector Employee</option>
+              <option>Self-Employed / Business</option>
+              <option>Freelancer</option>
+              <option>Homemaker</option>
+              <option>Retired</option>
+              <option>Unemployed / Job Seeker</option>
+              <option>Social Worker / NGO Professional</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Any Previous Voluntary / Social Work</label>
+          <div class="input-wrap">
+            <i class="fas fa-hands-helping"></i>
+            <textarea id="f_voluntary"
+              placeholder="Briefly describe any prior volunteer or NGO experience (if any)"></textarea>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Areas of Interest <span class="req">*</span></label>
+          <div class="tag-grid" id="areasTags">
+            <div class="tag-opt" onclick="toggleTag(this)">🍱 Food &amp; Relief</div>
+            <div class="tag-opt" onclick="toggleTag(this)">📚 Education</div>
+            <div class="tag-opt" onclick="toggleTag(this)">🏥 Healthcare</div>
+            <div class="tag-opt" onclick="toggleTag(this)">🌿 Environment</div>
+            <div class="tag-opt" onclick="toggleTag(this)">👧 Child Welfare</div>
+            <div class="tag-opt" onclick="toggleTag(this)">👩 Women Empowerment</div>
+            <div class="tag-opt" onclick="toggleTag(this)">💻 Digital Literacy</div>
+            <div class="tag-opt" onclick="toggleTag(this)">🎨 Arts &amp; Culture</div>
+            <div class="tag-opt" onclick="toggleTag(this)">📣 Awareness Campaigns</div>
+          </div>
+          <div class="field-error" id="err_areas">Please select at least one area.</div>
+        </div>
+
+        <div class="field-group">
+          <label>Why do you want to volunteer with Bondhu? <span class="req">*</span></label>
+          <div class="input-wrap">
+            <i class="fas fa-heart" style="top:16px;"></i>
+            <textarea id="f_why" placeholder="Tell us in your own words — what drives you to serve?"
+              style="min-height:110px;"></textarea>
+          </div>
+          <div class="field-error" id="err_why">Please share your motivation.</div>
+        </div>
+
+        <div class="field-group">
+          <label>How did you hear about us?</label>
+          <div class="input-wrap">
+            <i class="fas fa-bullhorn"></i>
+            <select id="f_source">
+              <option value="">Select an option</option>
+              <option>Friend / Family</option>
+              <option>Social Media</option>
+              <option>Website</option>
+              <option>Event / Camp</option>
+              <option>Volunteer referred me</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-secondary" onclick="goStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button class="btn-primary" id="submitBtn" onclick="submitForm()">
+            Submit Application &nbsp;<span class="spinner" id="submitSpinner"></span><i class="fas fa-paper-plane"
+              id="submitArrow"></i>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /form-card -->
+  </div><!-- /main-layout -->
+
+  <!-- SUCCESS PAGE -->
+  <div id="successPage">
+    <div class="hearts-canvas" id="heartsCanvas"></div>
+    <div class="success-inner">
+      <div class="success-icon">🌿</div>
+      <h2>Welcome to the Family!</h2>
+      <p>Dear <span class="applicant-name" id="successName">Volunteer</span>,<br>
+        Your application has been received. We are thrilled to have someone as passionate as you join the Bondhu family.
+        Your kindness is the change we've been waiting for.</p>
+      <p style="font-size:0.9rem;color:var(--text-light);margin-top:4px;">A confirmation has been sent to <strong
+          id="successEmail"></strong></p>
+      <div class="mail-note">
+        <i class="fas fa-envelope"></i>
+        <strong>What's next?</strong> Our team will review your application and reach out to you within 3–5 working
+        days. Thank you for being a partner in this beautiful journey of giving. 💚
+      </div>
+      <div class="home-link">
+        <a href="bondhu.html"><i class="fas fa-home"></i> Back to Bondhu Home</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── CONFIG ──
+    //  APPS SCRIPT WEB APP URL 
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzQr5aMbJQXsUbNAlAt7RmLWHQQ0mKRV3NbUJn5SEY_cNMNm4e5SeVsPwLjIIbufZ0fcQ/exec';
+
+    // ── STATE ──
+    let generatedOTP = '';
+    let otpVerified = false;
+    let countdownTimer = null;
+
+    // ── TOAST ──
+    function showToast(msg, isError = false) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(() => t.className = 'toast', 3200);
+    }
+
+    // ── STEP NAVIGATION ──
+    function goStep(n) {
+      [1, 2, 3].forEach(i => {
+        document.getElementById('step' + i).classList.toggle('active', i === n);
+        const dot = document.getElementById('dot' + i);
+        if (i < n) { dot.className = 'step-dot done'; dot.innerHTML = '<i class="fas fa-check" style="font-size:0.7rem"></i>'; }
+        else if (i === n) { dot.className = 'step-dot active'; dot.textContent = i; }
+        else { dot.className = 'step-dot'; dot.textContent = i; }
+      });
+      [1, 2].forEach(i => {
+        const line = document.getElementById('line' + i);
+        if (line) line.className = 'step-line' + (i < n ? ' done' : '');
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── VALIDATION HELPERS ──
+    function showErr(id, msg) {
+      const el = document.getElementById(id);
+      el.textContent = msg || el.textContent;
+      el.classList.add('show');
+    }
+    function clearErr(id) { document.getElementById(id).classList.remove('show'); }
+    function fieldVal(id) { return document.getElementById(id)?.value?.trim() || ''; }
+
+    // ── STEP 1: SEND OTP ──
+    function sendOTP() {
+      let ok = true;
+      const name = fieldVal('f_name'), phone = fieldVal('f_phone'), email = fieldVal('f_email');
+      if (!name) { showErr('err_name'); ok = false; } else clearErr('err_name');
+      if (!/^[\+]?[0-9]{10,13}$/.test(phone.replace(/\s/g, ''))) { showErr('err_phone'); ok = false; } else clearErr('err_phone');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('err_email'); ok = false; } else clearErr('err_email');
+      if (!ok) return;
+
+      const btn = document.getElementById('sendOtpBtn');
+      btn.disabled = true;
+      document.getElementById('otpSpinner').style.display = 'inline-block';
+      document.getElementById('otpArrow').style.display = 'none';
+
+      generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+
+      // Send OTP via Apps Script
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ action: 'sendOTP', name, email, otp: generatedOTP })
+      }).then(() => {
+        document.getElementById('emailDisplay').textContent = email;
+        document.getElementById('otpSentInfo').style.display = 'block';
+        goStep(2);
+        startCountdown();
+        showToast('✅ OTP sent to ' + email);
+      }).catch(() => {
+        // Still proceed — AppScript CORS may block response but request went through
+        document.getElementById('emailDisplay').textContent = email;
+        document.getElementById('otpSentInfo').style.display = 'block';
+        goStep(2);
+        startCountdown();
+        showToast('✅ OTP sent to ' + email);
+      }).finally(() => {
+        btn.disabled = false;
+        document.getElementById('otpSpinner').style.display = 'none';
+        document.getElementById('otpArrow').style.display = 'inline';
+      });
+    }
+
+    // ── OTP INPUTS ──
+    document.addEventListener('DOMContentLoaded', () => {
+      const boxes = document.querySelectorAll('.otp-box');
+      boxes.forEach((box, i) => {
+        box.addEventListener('input', e => {
+          box.value = box.value.replace(/\D/, '');
+          box.classList.toggle('filled', !!box.value);
+          if (box.value && i < boxes.length - 1) boxes[i + 1].focus();
+        });
+        box.addEventListener('keydown', e => {
+          if (e.key === 'Backspace' && !box.value && i > 0) { boxes[i - 1].focus(); boxes[i - 1].value = ''; boxes[i - 1].classList.remove('filled'); }
+        });
+        box.addEventListener('paste', e => {
+          e.preventDefault();
+          const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
+          pasted.split('').forEach((ch, j) => { if (boxes[i + j]) { boxes[i + j].value = ch; boxes[i + j].classList.add('filled'); } });
+          const next = boxes[Math.min(i + pasted.length, boxes.length - 1)];
+          next.focus();
+        });
+      });
+    });
+
+    function getEnteredOTP() {
+      return [...document.querySelectorAll('.otp-box')].map(b => b.value).join('');
+    }
+
+    // ── COUNTDOWN ──
+    function startCountdown() {
+      let secs = 60;
+      document.getElementById('countdown').textContent = secs;
+      document.getElementById('resendBtn').disabled = true;
+      document.getElementById('timerText').style.display = '';
+      clearInterval(countdownTimer);
+      countdownTimer = setInterval(() => {
+        secs--;
+        document.getElementById('countdown').textContent = secs;
+        if (secs <= 0) {
+          clearInterval(countdownTimer);
+          document.getElementById('resendBtn').disabled = false;
+          document.getElementById('timerText').style.display = 'none';
+        }
+      }, 1000);
+    }
+
+    function resendOTP() {
+      generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+      const email = fieldVal('f_email'), name = fieldVal('f_name');
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ action: 'sendOTP', name, email, otp: generatedOTP })
+      }).catch(() => { });
+      startCountdown();
+      showToast('New OTP sent!');
+    }
+
+    // ── VERIFY OTP ──
+    function verifyOTP() {
+      const entered = getEnteredOTP();
+      clearErr('err_otp');
+      if (entered.length < 6) { showErr('err_otp', 'Please enter all 6 digits.'); return; }
+      if (entered !== generatedOTP) { showErr('err_otp', 'Incorrect OTP. Please try again.'); return; }
+      otpVerified = true;
+      showToast('✅ Email verified!');
+      goStep(3);
+    }
+
+    // ── TAG TOGGLE ──
+    function toggleTag(el) { el.classList.toggle('selected'); }
+    function getSelectedTags() {
+      return [...document.querySelectorAll('.tag-opt.selected')].map(t => t.textContent.trim()).join(', ');
+    }
+
+    // ── SUBMIT FORM ──
+    function submitForm() {
+      if (!otpVerified) { showToast('Please verify your email first.', true); return; }
+      let ok = true;
+
+      const dob = fieldVal('f_dob');
+      const gender = document.querySelector('input[name=gender]:checked')?.value || '';
+      const house = fieldVal('f_house');
+      const locality = fieldVal('f_locality');
+      const area = fieldVal('f_area');
+      const district = fieldVal('f_district');
+      const state = fieldVal('f_state');
+      const landmark = fieldVal('f_landmark');
+      const address = [house, locality, area, district, state, landmark].filter(Boolean).join(', ');
+      const idtype = fieldVal('f_idtype');
+      const idnum = fieldVal('f_idnum');
+      const areas = getSelectedTags();
+      const why = fieldVal('f_why');
+
+      if (!dob) { showErr('err_dob'); ok = false; } else clearErr('err_dob');
+      if (!gender) { showErr('err_gender'); ok = false; } else clearErr('err_gender');
+      if (!house || !locality || !area || !district || !state) { showErr('err_address', 'Please fill all required address fields.'); ok = false; } else clearErr('err_address');
+      if (!idtype) { showErr('err_idtype'); ok = false; } else clearErr('err_idtype');
+      if (!idnum) { showErr('err_idnum'); ok = false; } else clearErr('err_idnum');
+      if (!areas) { showErr('err_areas', 'Please select at least one area.'); ok = false; } else clearErr('err_areas');
+      if (!why) { showErr('err_why'); ok = false; } else clearErr('err_why');
+      if (!ok) return;
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      document.getElementById('submitSpinner').style.display = 'inline-block';
+      document.getElementById('submitArrow').style.display = 'none';
+
+      const formData = {
+        action: 'submitVolunteer',
+        name: fieldVal('f_name'),
+        phone: fieldVal('f_phone'),
+        email: fieldVal('f_email'),
+        dob,
+        gender,
+        address,
+        house_no: house,
+        locality,
+        area,
+        district,
+        state,
+        landmark: landmark || 'N/A',
+        id_type: idtype,
+        id_number: idnum,
+        occupation: fieldVal('f_occupation') || 'Not specified',
+        voluntary: fieldVal('f_voluntary') || 'None',
+        areas,
+        why,
+        source: fieldVal('f_source') || 'Not specified',
+        submitted_at: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+      };
+
+      // Send all data to Apps Script — it saves to Sheet + sends emails
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(formData)
+      }).then(() => {
+        showSuccess(formData.name, formData.email);
+      }).catch(() => {
+        showSuccess(formData.name, formData.email);
+      }).finally(() => {
+        btn.disabled = false;
+        document.getElementById('submitSpinner').style.display = 'none';
+        document.getElementById('submitArrow').style.display = 'inline';
+      });
+    }
+
+    // ── SUCCESS ──
+    function showSuccess(name, email) {
+      document.getElementById('successName').textContent = name;
+      document.getElementById('successEmail').textContent = email;
+      const pg = document.getElementById('successPage');
+      pg.style.display = 'block';
+      requestAnimationFrame(() => { pg.style.opacity = '1'; });
+      spawnHearts();
+    }
+
+    // ── HEARTS ──
+    function spawnHearts() {
+      const canvas = document.getElementById('heartsCanvas');
+      const emojis = ['❤️', '🧡', '💛', '💖', '💕', '💚', '🌿', '🌸', '✨', '💝',];
+      let count = 0;
+      function spawn() {
+        if (count > 200) return;
+        count++;
+        const el = document.createElement('span');
+        el.className = 'falling-heart';
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        const size = 1.2 + Math.random() * 2;
+        const dur = 4 + Math.random() * 7;
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.fontSize = size + 'rem';
+        el.style.animationDuration = dur + 's';
+        el.style.animationDelay = (Math.random() * 3) + 's';
+        canvas.appendChild(el);
+        setTimeout(() => el.remove(), (dur + 4) * 1000);
+      }
+      for (let i = 0; i < 40; i++) spawn();
+      const iv = setInterval(spawn, 400);
+      setTimeout(() => clearInterval(iv), 15000);
+    }
+  </script>
+</body>
+
+</html>
