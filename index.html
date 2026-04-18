@@ -90,12 +90,10 @@
     }
 
     .logo-slot {
-      width: 58px;
-      height: 58px;
-      min-width: 58px;
-
-
-      border-radius: 12px;
+      width: 76px;
+      height: 76px;
+      min-width: 76px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -104,9 +102,11 @@
       text-align: center;
       line-height: 1.4;
       cursor: pointer;
-      transition: background .2s;
+      transition: background .2s, transform .2s;
       overflow: hidden;
+      box-shadow: 0 0 0 3px rgba(245,166,35,0.5), 0 4px 18px rgba(0,0,0,0.3);
     }
+    .logo-slot:hover { transform: scale(1.06); }
 
 
 
@@ -114,22 +114,31 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 50%;
     }
 
     .logo-text h1 {
       font-family: var(--font-head);
-      font-size: 1.65rem;
+      font-size: 2.1rem;
       font-weight: 700;
       color: #fff;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
     .logo-text span {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       color: rgba(255, 255, 255, 0.6);
       letter-spacing: 2px;
       text-transform: uppercase;
+    }
+
+    .logo-text .logo-reg {
+      font-size: 0.62rem;
+      color: var(--orange-light);
+      letter-spacing: 1px;
+      display: block;
+      font-weight: 600;
     }
 
     nav {
@@ -466,22 +475,51 @@
     }
 
     .nav-donate {
-      background: rgba(217, 119, 38, 0.15) !important;
-      color: var(--orange-light) !important;
-      border: 1px solid rgba(217, 119, 38, 0.4) !important;
+      background: var(--orange) !important;
+      color: #fff !important;
+      border: none !important;
       border-radius: 50px !important;
-      padding: 7px 18px !important;
-      font-weight: 600 !important;
-      font-size: 0.82rem !important;
-      margin-left: 4px;
+      padding: 11px 26px !important;
+      font-weight: 700 !important;
+      font-size: 0.92rem !important;
+      margin-left: 8px;
       cursor: pointer;
       font-family: inherit;
       transition: all .2s;
+      animation: donatePulse 2.2s ease-in-out infinite;
+      box-shadow: 0 0 0 0 rgba(217,119,38,0.7);
     }
 
     .nav-donate:hover {
-      background: var(--orange) !important;
-      color: #fff !important;
+      background: var(--orange-light) !important;
+      transform: translateY(-2px) scale(1.06) !important;
+      animation: none;
+      box-shadow: 0 8px 28px rgba(217,119,38,.55) !important;
+    }
+
+    @keyframes donatePulse {
+      0% { box-shadow: 0 0 0 0 rgba(217,119,38,0.7); }
+      50% { box-shadow: 0 0 0 10px rgba(217,119,38,0); }
+      100% { box-shadow: 0 0 0 0 rgba(217,119,38,0); }
+    }
+
+    /* ── LETTER POP ANIMATION ── */
+    .donate-letters {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .donate-letters .dletter {
+      display: inline-block;
+      animation: letterPop 2.4s ease-in-out infinite;
+      transform-origin: center bottom;
+    }
+
+    @keyframes letterPop {
+      0%, 100%   { transform: scale(1);    opacity: 1; }
+      10%        { transform: scale(1.15); opacity: 1; }
+      20%        { transform: scale(1);    opacity: 1; }
     }
 
     /* ── HERO ── */
@@ -574,6 +612,25 @@
       background: var(--orange-light);
       transform: translateY(-3px);
       box-shadow: 0 8px 24px rgba(217, 119, 38, .4);
+    }
+
+    .btn-donate-hero {
+      background: var(--orange);
+      color: #fff;
+      padding: 18px 44px;
+      border-radius: 50px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      animation: donatePulse 2.2s ease-in-out infinite;
+      box-shadow: 0 6px 24px rgba(217,119,38,0.45);
+      letter-spacing: 0.5px;
     }
 
     .btn-outline {
@@ -1604,7 +1661,90 @@
       line-height: 1.6;
     }
 
-    /* ── DONATE BANNER ── */
+    /* ── HERO PARTICLES ── */
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100%) scale(0.4); opacity: 0; }
+      10% { opacity: 0.6; }
+      80% { opacity: 0.4; }
+      100% { transform: translateY(-120px) scale(1.2) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── BANK DETAILS ── */
+    .bank-details-box {
+      margin-top: 28px;
+      background: rgba(255,255,255,0.18);
+      border: 2px solid rgba(255,255,255,0.35);
+      border-radius: 16px;
+      padding: 20px 28px;
+      backdrop-filter: blur(6px);
+      text-align: left;
+    }
+
+    .bank-details-box h5 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bank-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      gap: 16px;
+    }
+
+    .bank-row:last-child { border-bottom: none; }
+
+    .bank-row .bank-lbl {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .bank-row .bank-val {
+      font-size: 0.9rem;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      font-family: monospace;
+      background: rgba(0,0,0,0.2);
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .bank-caption {
+      margin-top: 14px;
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      line-height: 1.6;
+      font-style: italic;
+    }
     .donate-banner {
       background: linear-gradient(135deg, var(--orange) 0%, #e8a520 100%);
       padding: 66px 5%;
@@ -1668,13 +1808,13 @@
     }
 
     .donate-qr-wrap img {
-      width: 130px;
-      height: 130px;
-      border-radius: 12px;
+      width: 210px;
+      height: 210px;
+      border-radius: 16px;
       object-fit: contain;
       background: #fff;
-      padding: 6px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+      padding: 8px;
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.25);
     }
 
     .donate-qr-msg {
@@ -1991,6 +2131,7 @@
       <div class="logo-text">
         <h1>BONDHU</h1>
         <span>Ramrajatala, Howrah</span>
+        <span class="logo-reg">Govt. Registration No: IV-190200035/2022</span>
       </div>
     </a>
     <nav>
@@ -2000,11 +2141,11 @@
       <a href="#programs">Programs</a>
       <a href="#impact">Impact</a>
       <a href="#events">Events</a>
-      <a href="#people">Stories</a>
+      <a href="#people">Our team</a>
       <a href="#contact">Contact</a>
       <a href="#volunteer" class="nav-join">Join Us</a>
-      <a href="#donate" class="nav-donate">
-        <i class="fas fa-hand-holding-heart"></i> Donate Now
+      <a href="#donate" class="nav-donate" id="navDonateBtn">
+        <i class="fas fa-hand-holding-heart"></i> <span class="donate-letters" id="navDonateLetters">Donate Now</span>
       </a>
     </nav>
     <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Menu">
@@ -2028,7 +2169,7 @@
       <a href="#programs" onclick="closeMobileNav()">Programs</a>
       <a href="#impact" onclick="closeMobileNav()">Impact</a>
       <a href="#events" onclick="closeMobileNav()">Events</a>
-      <a href="#people" onclick="closeMobileNav()">Stories</a>
+      <a href="#people" onclick="closeMobileNav()">Our team</a>
       <a href="#contact" onclick="closeMobileNav()">Contact</a>
       <a href="#volunteer" class="mobile-join-link" onclick="closeMobileNav()">Join Us</a>
       <a href="#donate" class="mobile-donate-link" onclick="closeMobileNav()">
@@ -2077,7 +2218,7 @@
       <div class="hero-btns">
         <a href="#volunteer" class="btn-primary"><i class="fas fa-hands-helping"></i> Volunteer With Us</a>
         <a href="#events" class="btn-outline"><i class="fas fa-history"></i> Our Journey</a><a href="#donate"
-          class="btn-primary"><i class="fas fa-hand-holding-heart"></i> Donate Now
+          class="btn-donate-hero" id="heroDonateBtn"><i class="fas fa-hand-holding-heart"></i> <span class="donate-letters" id="heroDonateLetters">Donate Now</span>
         </a>
       </div>
       <div class="hero-stats">
@@ -2086,16 +2227,14 @@
           <div class="founded-year">2017</div>
           <div class="founded-lbl">Founded</div>
         </div>
-        <div class="reg-glass">
-          <div class="glass-shine"></div>
-          <div class="reg-glass-lbl">Govt. Registration No.</div>
-          <div class="reg-glass-num">IV-190200035/2022</div>
-        </div>
+        
       </div>
     </div>
 
     <!-- GRASS ANIMATION -->
     <div class="hero-grass" id="heroGrass"></div>
+    <!-- PARTICLES -->
+    <div class="hero-particles" id="heroParticles"></div>
   </section>
 
   <!-- ABOUT -->
@@ -2375,33 +2514,45 @@
 
 
 
-  <!-- PEOPLE HELPED / STORIES -->
+  <!-- PEOPLE / OUR TEAM -->
   <section class="people" id="people">
     <div class="section-header">
-      <span class="section-tag">Voices From the Field</span>
-      <h2 class="section-title">People We've Walked With</h2>
-      <p class="section-sub">Real stories of community members whose lives have been touched by Bondhu's work.</p>
+      <span class="section-tag">Our Team</span>
+      <h2 class="section-title">The People Behind Bondhu</h2>
+      <p class="section-sub">Meet the dedicated individuals who volunteer their time, heart, and energy to serve our community.</p>
     </div>
     <div class="people-grid">
       <div class="person-card">
-        <div class="person-avatar">👩</div>
-        <h4>Ram</h4>
-        <div class="role">Food Relief Beneficiary</div>
-        <p>"caption"</p>
+        <div class="person-avatar">👨‍💼</div>
+        <h4>Anirban Roy</h4>
+        <div class="role">🏅 Founder &amp; President</div>
+        <p>"Leading Bondhu with vision and compassion since 2017."</p>
       </div>
       <div class="person-card">
-        <div class="person-avatar">👦</div>
-        <h4>shyam</h4>
-        <div class="role">Education Program — Student</div>
-        <p>"cap."</p>
+        <div class="person-avatar">👨‍💼</div>
+        <h4>Team Member</h4>
+        <div class="role">🌟 Vice President</div>
+        <p>"Supporting every initiative with dedication and leadership."</p>
       </div>
       <div class="person-card">
-        <div class="person-avatar">👴</div>
-        <h4>jodu</h4>
-        <div class="role">Health Camp Attendee</div>
-        <p>"cap"</p>
+        <div class="person-avatar">👩‍💼</div>
+        <h4>Team Member</h4>
+        <div class="role">📋 Secretary</div>
+        <p>"Keeping our operations organized and our mission on track."</p>
       </div>
-
+      <div class="person-card">
+        <div class="person-avatar">👨‍💼</div>
+        <h4>Team Member</h4>
+        <div class="role">💰 Treasurer</div>
+        <p>"Ensuring every rupee is accounted for and well-spent."</p>
+      </div>
+      <div class="person-card">
+        <div class="person-avatar">🧑‍🤝‍🧑</div>
+        <h4>Our Volunteers</h4>
+        <div class="role">❤️ Core Volunteer Team</div>
+        <p>"50+ volunteers across Howrah — the backbone of all our drives."</p>
+      </div>
+    </div>
   </section>
 
   <!-- VOLUNTEER -->
@@ -2475,6 +2626,30 @@
           Payment</span>
       </div>
     </div>
+    <div class="bank-details-box">
+      <h5><i class="fas fa-university"></i> Bank Transfer Details</h5>
+      <div class="bank-row">
+        <span class="bank-lbl">Account Name</span>
+        <span class="bank-val">BONDHU</span>
+      </div>
+      <div class="bank-row">
+        <span class="bank-lbl">Account Number</span>
+        <span class="bank-val">235905001708</span>
+      </div>
+      <div class="bank-row">
+        <span class="bank-lbl">IFSC Code</span>
+        <span class="bank-val">ICIC0002359</span>
+      </div>
+      <div class="bank-row">
+        <span class="bank-lbl">Bank</span>
+        <span class="bank-val"> ICICI Bank</span>
+      </div>
+      <div class="bank-row">
+        <span class="bank-lbl">UPI ID</span>
+        <span class="bank-val">8336012877@okbizaxis</span>
+      </div>
+    </div>
+    <p class="bank-caption">🔒 All donations are 100% transparent and go directly to community welfare programs.<br>Bondhu is a registered NGO — Reg. No: IV-190200035/2022</p>
   </div>
 
   <!-- CONTACT -->
@@ -2536,7 +2711,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div style="display:flex;align-items:center;gap:13px;margin-bottom:4px;">
-          <div class="logo-slot" style="width:46px;height:65px;font-size:9px;border-radius:9px;pointer-events:none;">
+          <div class="logo-slot" style="width:46px;height:72px;font-size:9px;border-radius:50px;pointer-events:none;">
             <span><img src="https://raw.githubusercontent.com/bandhuar01-ngo/bondhungo/main/Bondhu_logo.png"
                 type="image/png"></span>
           </div>
@@ -2565,7 +2740,7 @@
           <li><a href="https://bandhuar01-ngo.github.io/bondhungo/gallery.html"> Gallery </a></li>
           <li><a href="#impact">Impact</a></li>
           <li><a href="#events">Event History</a></li>
-          <li><a href="#people">Stories</a></li>
+          <li><a href="#people">Our Team</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2788,7 +2963,32 @@
     /* ── LOAD IMPACT DATA ── */
     document.addEventListener('DOMContentLoaded', loadImpact);
 
-    /* ── GRASS BLADES ── */
+    /* ── HERO PARTICLES ── */
+    (function spawnParticles() {
+      const container = document.getElementById('heroParticles');
+      if (!container) return;
+      const colors = ['rgba(245,166,35,0.55)', 'rgba(255,255,255,0.18)', 'rgba(56,176,108,0.4)', 'rgba(217,119,38,0.45)', 'rgba(255,255,255,0.28)'];
+      const count = 28;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = 4 + Math.random() * 14;
+        const dur = 7 + Math.random() * 12;
+        const delay = Math.random() * 10;
+        const left = Math.random() * 100;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        p.style.cssText = `
+          width:${size}px; height:${size}px;
+          left:${left}%;
+          bottom:${Math.random() * 40}px;
+          background:${color};
+          animation-duration:${dur}s;
+          animation-delay:${delay}s;
+        `;
+        container.appendChild(p);
+      }
+    })();
+
     (function generateGrass() {
       const container = document.getElementById('heroGrass');
       if (!container) return;
@@ -2821,6 +3021,22 @@
       }
     })();
 
+    /* ── DONATE LETTER POP ── */
+    (function initDonateLetters() {
+      ['navDonateLetters', 'heroDonateLetters'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const text = el.textContent;
+        el.innerHTML = '';
+        [...text].forEach((ch, i) => {
+          const s = document.createElement('span');
+          s.className = 'dletter';
+          s.textContent = ch === ' ' ? '\u00A0' : ch;
+          s.style.animationDelay = `${i * 0.1}s`;
+          el.appendChild(s);
+        });
+      });
+    })();
 
   </script>
 </body>
