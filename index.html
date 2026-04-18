@@ -204,16 +204,59 @@
     }
 
     .nav-join {
-      background: var(--orange) !important;
+      background: var(--green-mid) !important;
       color: #fff !important;
-      margin-left: 6px;
+      border: none !important;
       border-radius: 50px !important;
-      padding: 8px 22px !important;
-      font-weight: 600 !important;
+      padding: 11px 26px !important;
+      font-weight: 700 !important;
+      font-size: 0.92rem !important;
+      margin-left: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .2s;
+      position: relative;
+      overflow: hidden;
+      animation: joinShimmer 2.8s ease-in-out infinite;
+      min-width: 140px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      text-decoration: none;
+    }
+
+    .nav-join::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      animation: joinSweep 2.8s ease-in-out infinite;
+    }
+
+    @keyframes joinSweep {
+      0%   { left: -100%; }
+      40%  { left: 140%; }
+      100% { left: 140%; }
+    }
+
+    @keyframes joinShimmer {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,138,80,0.7); }
+      50%       { box-shadow: 0 0 0 8px rgba(37,138,80,0); }
     }
 
     .nav-join:hover {
-      background: var(--orange-light) !important;
+      background: var(--green-dark) !important;
+      transform: translateY(-2px) scale(1.06) !important;
+      box-shadow: 0 8px 28px rgba(37,138,80,.55) !important;
+      animation: none;
+    }
+
+    .nav-join:hover::before {
+      animation: none;
     }
 
     .hamburger {
@@ -488,6 +531,12 @@
       transition: all .2s;
       animation: donatePulse 2.2s ease-in-out infinite;
       box-shadow: 0 0 0 0 rgba(217,119,38,0.7);
+      min-width: 140px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      text-decoration: none;
     }
 
     .nav-donate:hover {
@@ -2130,7 +2179,6 @@
       <input type="file" id="logoUpload" accept="image/*" style="display:none" onchange="handleLogoUpload(this)">
       <div class="logo-text">
         <h1>BONDHU</h1>
-        <span>Ramrajatala, Howrah</span>
         <span class="logo-reg">Govt. Registration No: IV-190200035/2022</span>
       </div>
     </a>
@@ -2143,7 +2191,7 @@
       <a href="#events">Events</a>
       <a href="#people">Our team</a>
       <a href="#contact">Contact</a>
-      <a href="#volunteer" class="nav-join">Join Us</a>
+      <a href="#volunteer" class="nav-join"><i class="fas fa-users"></i> Join Us</a>
       <a href="#donate" class="nav-donate" id="navDonateBtn">
         <i class="fas fa-hand-holding-heart"></i> <span class="donate-letters" id="navDonateLetters">Donate Now</span>
       </a>
