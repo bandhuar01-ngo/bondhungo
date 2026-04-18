@@ -487,81 +487,6 @@
       color: var(--green);
     }
 
-    /* OTP BOX */
-    .otp-sent-info {
-      background: var(--green-pale);
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    .otp-sent-info p {
-      font-size: 0.85rem;
-      color: var(--green-dark);
-    }
-
-    .otp-sent-info strong {
-      color: var(--green);
-    }
-
-    .otp-inputs {
-      display: flex;
-      gap: 10px;
-      margin: 16px 0;
-    }
-
-    .otp-inputs input {
-      width: 52px;
-      height: 56px;
-      text-align: center;
-      font-size: 1.4rem;
-      font-weight: 700;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      color: var(--green-dark);
-      outline: none;
-      transition: .2s;
-      font-family: var(--font-body);
-    }
-
-    .otp-inputs input:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(27, 110, 63, 0.1);
-    }
-
-    .otp-inputs input.filled {
-      border-color: var(--green-mid);
-      background: var(--green-pale);
-    }
-
-    .resend-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .resend-btn {
-      background: none;
-      border: none;
-      color: var(--green);
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    .resend-btn:disabled {
-      color: var(--text-light);
-      text-decoration: none;
-      cursor: default;
-    }
-
-    .timer-text {
-      font-size: 0.8rem;
-      color: var(--text-light);
-    }
 
     /* BUTTONS */
     .btn-primary {
@@ -903,15 +828,6 @@
         justify-content: center;
       }
 
-      .otp-inputs {
-        gap: 8px;
-      }
-
-      .otp-inputs input {
-        width: 42px;
-        height: 48px;
-        font-size: 1.2rem;
-      }
 
       .hero-strip h2 {
         font-size: 1.6rem;
@@ -944,18 +860,8 @@
       }
     }
 
-    @media(max-width:400px) {
-      .otp-inputs input {
-        width: 36px;
-        height: 42px;
-        font-size: 1.1rem;
-      }
-
-      .otp-inputs {
-        gap: 6px;
-      }
-    }
   </style>
+
 </head>
 
 <body>
@@ -983,13 +889,9 @@
       <div class="step-dot active" id="dot1">1</div>
       <div class="step-line" id="line1"></div>
       <div class="step-dot" id="dot2">2</div>
-      <div class="step-line" id="line2"></div>
-      <div class="step-dot" id="dot3">3</div>
     </div>
     <div style="display:flex;justify-content:center;gap:0;margin-top:8px;">
       <div style="width:34px;font-size:0.6rem;color:rgba(255,255,255,0.6);text-align:center;">Info</div>
-      <div style="width:60px;"></div>
-      <div style="width:34px;font-size:0.6rem;color:rgba(255,255,255,0.6);text-align:center;">Verify</div>
       <div style="width:60px;"></div>
       <div style="width:34px;font-size:0.6rem;color:rgba(255,255,255,0.6);text-align:center;">Profile</div>
     </div>
@@ -1043,7 +945,7 @@
         <div class="form-part-header">
           <h3><i class="fas fa-user-circle" style="color:var(--green);margin-right:8px;"></i>Step 1 — Basic Information
           </h3>
-          <p>We'll send a verification code to your email before proceeding.</p>
+          <p>Fill in your contact details to get started.</p>
         </div>
 
         <div class="field-group">
@@ -1075,57 +977,17 @@
         </div>
 
         <div class="btn-row" style="border-top:none;padding-top:4px;">
-          <button class="btn-primary" id="sendOtpBtn" onclick="sendOTP()">
-            Send Verification Code &nbsp;<span class="spinner" id="otpSpinner"></span><i class="fas fa-arrow-right"
-              id="otpArrow"></i>
+          <button class="btn-primary" id="nextStep1Btn" onclick="validateStep1()">
+            Continue &nbsp;<i class="fas fa-arrow-right"></i>
           </button>
         </div>
       </div>
 
-      <!-- STEP 2: OTP Verification -->
+
+      <!-- STEP 2: Full Form -->
       <div class="form-section" id="step2">
         <div class="form-part-header">
-          <h3><i class="fas fa-shield-alt" style="color:var(--green);margin-right:8px;"></i>Step 2 — Verify Your Email
-          </h3>
-          <p>Enter the 6-digit code sent to your inbox.</p>
-        </div>
-
-        <div class="otp-sent-info" id="otpSentInfo">
-          <p>A verification code has been sent to <strong id="emailDisplay"></strong>. Please check your inbox (and spam
-            folder).</p>
-        </div>
-
-        <div class="field-group" style="margin-top:16px;">
-          <label>Enter OTP <span class="req">*</span></label>
-          <div class="otp-inputs" id="otpInputs">
-            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
-            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
-            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
-            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
-            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
-            <input type="text" maxlength="1" class="otp-box" inputmode="numeric">
-          </div>
-          <div class="field-error" id="err_otp">Incorrect OTP. Please try again.</div>
-        </div>
-
-        <div class="resend-row">
-          <button class="resend-btn" id="resendBtn" disabled onclick="resendOTP()">Resend Code</button>
-          <span class="timer-text" id="timerText">Resend in <span id="countdown">60</span>s</span>
-        </div>
-
-        <div class="btn-row">
-          <button class="btn-secondary" onclick="goStep(1)"><i class="fas fa-arrow-left"></i> Back</button>
-          <button class="btn-primary" id="verifyBtn" onclick="verifyOTP()">
-            Verify &amp; Continue &nbsp;<span class="spinner" id="verifySpinner"></span><i class="fas fa-check"
-              id="verifyArrow"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- STEP 3: Full Form -->
-      <div class="form-section" id="step3">
-        <div class="form-part-header">
-          <h3><i class="fas fa-clipboard-list" style="color:var(--green);margin-right:8px;"></i>Step 3 — Complete Your
+          <h3><i class="fas fa-clipboard-list" style="color:var(--green);margin-right:8px;"></i>Step 2 — Complete Your
             Profile</h3>
           <p>Help us know you better so we can place you where you shine.</p>
         </div>
@@ -1358,7 +1220,7 @@
         </div>
 
         <div class="btn-row">
-          <button class="btn-secondary" onclick="goStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button class="btn-secondary" onclick="goStep(1)"><i class="fas fa-arrow-left"></i> Back</button>
           <button class="btn-primary" id="submitBtn" onclick="submitForm()">
             Submit Application &nbsp;<span class="spinner" id="submitSpinner"></span><i class="fas fa-paper-plane"
               id="submitArrow"></i>
@@ -1399,11 +1261,6 @@
     //  APPS SCRIPT WEB APP URL 
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxrcnaBKipmEyjrFR10G8uJEbWS3r1iaPRemImVE_vJan1gwsKqzVy3tllmVUAz3htx8g/exec';
 
-    // ── STATE ──
-    let generatedOTP = '';
-    let otpVerified = false;
-    let countdownTimer = null;
-
     // ── TOAST ──
     function showToast(msg, isError = false) {
       const t = document.getElementById('toast');
@@ -1414,17 +1271,15 @@
 
     // ── STEP NAVIGATION ──
     function goStep(n) {
-      [1, 2, 3].forEach(i => {
+      [1, 2].forEach(i => {
         document.getElementById('step' + i).classList.toggle('active', i === n);
         const dot = document.getElementById('dot' + i);
         if (i < n) { dot.className = 'step-dot done'; dot.innerHTML = '<i class="fas fa-check" style="font-size:0.7rem"></i>'; }
         else if (i === n) { dot.className = 'step-dot active'; dot.textContent = i; }
         else { dot.className = 'step-dot'; dot.textContent = i; }
       });
-      [1, 2].forEach(i => {
-        const line = document.getElementById('line' + i);
-        if (line) line.className = 'step-line' + (i < n ? ' done' : '');
-      });
+      const line = document.getElementById('line1');
+      if (line) line.className = 'step-line' + (1 < n ? ' done' : '');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1492,49 +1347,17 @@
       if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // ── STEP 1: SEND OTP ──
-    function sendOTP() {
+    // ── STEP 1: Validate & Proceed ──
+    function validateStep1() {
       let ok = true;
       const name = fieldVal('f_name'), phone = fieldVal('f_phone'), email = fieldVal('f_email');
       if (!name) { showErr('err_name'); ok = false; } else clearErr('err_name');
       if (!/^[\+]?[0-9]{10,13}$/.test(phone.replace(/\s/g, ''))) { showErr('err_phone'); ok = false; } else clearErr('err_phone');
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('err_email'); ok = false; } else clearErr('err_email');
       if (!ok) return;
-
-      const btn = document.getElementById('sendOtpBtn');
-      btn.disabled = true;
-      document.getElementById('otpSpinner').style.display = 'inline-block';
-      document.getElementById('otpArrow').style.display = 'none';
-
-      generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-
-      // Send OTP via Apps Script
-      fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ action: 'sendOTP', name, email, otp: generatedOTP })
-      }).then(() => {
-        document.getElementById('emailDisplay').textContent = email;
-        document.getElementById('otpSentInfo').style.display = 'block';
-        goStep(2);
-        startCountdown();
-        showToast('✅ OTP sent to ' + email);
-      }).catch(() => {
-        // Still proceed — AppScript CORS may block response but request went through
-        document.getElementById('emailDisplay').textContent = email;
-        document.getElementById('otpSentInfo').style.display = 'block';
-        goStep(2);
-        startCountdown();
-        showToast('✅ OTP sent to ' + email);
-      }).finally(() => {
-        btn.disabled = false;
-        document.getElementById('otpSpinner').style.display = 'none';
-        document.getElementById('otpArrow').style.display = 'inline';
-      });
+      goStep(2);
     }
 
-    // ── OTP INPUTS ──
     document.addEventListener('DOMContentLoaded', () => {
       // Live clear DOB error
       document.getElementById('f_dob').addEventListener('change', () => {
@@ -1549,72 +1372,7 @@
           clearErr('err_idnum');
         }
       });
-      // OTP inputs
-      const boxes = document.querySelectorAll('.otp-box');
-      boxes.forEach((box, i) => {
-        box.addEventListener('input', e => {
-          box.value = box.value.replace(/\D/, '');
-          box.classList.toggle('filled', !!box.value);
-          if (box.value && i < boxes.length - 1) boxes[i + 1].focus();
-        });
-        box.addEventListener('keydown', e => {
-          if (e.key === 'Backspace' && !box.value && i > 0) { boxes[i - 1].focus(); boxes[i - 1].value = ''; boxes[i - 1].classList.remove('filled'); }
-        });
-        box.addEventListener('paste', e => {
-          e.preventDefault();
-          const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
-          pasted.split('').forEach((ch, j) => { if (boxes[i + j]) { boxes[i + j].value = ch; boxes[i + j].classList.add('filled'); } });
-          const next = boxes[Math.min(i + pasted.length, boxes.length - 1)];
-          next.focus();
-        });
-      });
     });
-
-    function getEnteredOTP() {
-      return [...document.querySelectorAll('.otp-box')].map(b => b.value).join('');
-    }
-
-    // ── COUNTDOWN ──
-    function startCountdown() {
-      let secs = 60;
-      document.getElementById('countdown').textContent = secs;
-      document.getElementById('resendBtn').disabled = true;
-      document.getElementById('timerText').style.display = '';
-      clearInterval(countdownTimer);
-      countdownTimer = setInterval(() => {
-        secs--;
-        document.getElementById('countdown').textContent = secs;
-        if (secs <= 0) {
-          clearInterval(countdownTimer);
-          document.getElementById('resendBtn').disabled = false;
-          document.getElementById('timerText').style.display = 'none';
-        }
-      }, 1000);
-    }
-
-    function resendOTP() {
-      generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-      const email = fieldVal('f_email'), name = fieldVal('f_name');
-      fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ action: 'sendOTP', name, email, otp: generatedOTP })
-      }).catch(() => { });
-      startCountdown();
-      showToast('New OTP sent!');
-    }
-
-    // ── VERIFY OTP ──
-    function verifyOTP() {
-      const entered = getEnteredOTP();
-      clearErr('err_otp');
-      if (entered.length < 6) { showErr('err_otp', 'Please enter all 6 digits.'); return; }
-      if (entered !== generatedOTP) { showErr('err_otp', 'Incorrect OTP. Please try again.'); return; }
-      otpVerified = true;
-      showToast('✅ Email verified!');
-      goStep(3);
-    }
 
     // ── TAG TOGGLE ──
     function toggleTag(el) { el.classList.toggle('selected'); }
@@ -1624,7 +1382,6 @@
 
     // ── SUBMIT FORM ──
     function submitForm() {
-      if (!otpVerified) { showToast('Please verify your email first.', true); return; }
       let ok = true;
 
       const dob = fieldVal('f_dob');
