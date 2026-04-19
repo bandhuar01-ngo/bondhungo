@@ -1091,11 +1091,18 @@
     }
 
     .program-top {
-      height: 150px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 3rem;
+      min-height: 160px;
+    }
+
+    .program-top img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: unset;
     }
 
     .p-green {
@@ -1124,6 +1131,7 @@
 
     .program-body {
       padding: 22px;
+      min-height: 64px;
     }
 
     .program-body h3 {
@@ -2352,54 +2360,10 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
       <h2 class="section-title">Our Programs</h2>
       <p class="section-sub">From daily meals to emergency floods — we show up wherever we're needed most.</p>
     </div>
-    <div class="programs-grid">
-      <div class="program-card">
-        <div class="program-top p-orange">🍱</div>
-        <div class="program-body">
-          <h3>Food Distribution</h3>
-          <p>Regular food packets, hot meals, and ration drives for daily-wage workers and underprivileged families in
-            Howrah.</p>
-        </div>
-      </div>
-      <div class="program-card">
-        <div class="program-top p-green">📚</div>
-        <div class="program-body">
-          <h3>Education Support</h3>
-          <p>Distributing books, stationery, and school bags to underprivileged students. Enabling brighter futures one
-            child at a time.</p>
-        </div>
-      </div>
-      <div class="program-card">
-        <div class="program-top p-teal">🩺</div>
-        <div class="program-body">
-          <h3>Health Camps</h3>
-          <p>Free medical check-ups, blood donation drives, and health awareness programs improving community wellness.
-          </p>
-        </div>
-      </div>
-      <div class="program-card">
-        <div class="program-top p-cream">👕</div>
-        <div class="program-body">
-          <h3>Clothing Drive</h3>
-          <p>Collecting and distributing warm clothes, blankets, and essentials during winter and disaster situations.
-          </p>
-        </div>
-      </div>
-      <div class="program-card">
-        <div class="program-top p-yellow">🌊</div>
-        <div class="program-body">
-          <h3>Disaster Relief</h3>
-          <p>Rapid response to floods, cyclones, and calamities — providing emergency food, medicine, and shelter
-            materials.</p>
-        </div>
-      </div>
-      <div class="program-card">
-        <div class="program-top p-pink">💡</div>
-        <div class="program-body">
-          <h3>Awareness Campaigns</h3>
-          <p>Driving change through campaigns on women's rights, environment, and civic responsibilities across Howrah.
-          </p>
-        </div>
+    <div class="programs-grid" id="programsGrid">
+      <div style="grid-column:1/-1;text-align:center;color:var(--text-light);padding:48px 20px;">
+        <i class="fas fa-spinner fa-spin" style="font-size:1.6rem;color:var(--green);"></i>
+        <p style="margin-top:12px;font-size:.9rem;">Loading programs…</p>
       </div>
     </div>
   </section>
@@ -2843,6 +2807,79 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
   <script>
     /* ── FOOTER YEAR ── */
     document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+   
+    const PROGRAMS_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSP5TzYb5eWFkiqfoKJiq20KkpUMsAYQWD4oNXE7QIJvUtf6n_lxgvQgAezdxAUw2E/exec';
+
+    const PROGRAM_COLOR_CYCLE = ['p-orange','p-green','p-teal','p-cream','p-yellow','p-pink'];
+
+    function toDriveDirectImg(url) {
+      if (!url) return '';
+      // Already a thumbnail URL → use as-is
+      if (url.includes('thumbnail?id=')) return url;
+      // Drive share/view link → convert to thumbnail
+      const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      if (m) return `https://drive.google.com/thumbnail?id=${m[1]}&sz=w600`;
+      return url;
+    }
+
+    function renderProgramCards(items) {
+      const grid = document.getElementById('programsGrid');
+      if (!items.length) {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-light);padding:40px">No programs found in sheet.</p>';
+        return;
+      }
+      grid.innerHTML = items.map(({ imageUrl, name, desc, colorClass }, i) => {
+        const cls = colorClass || PROGRAM_COLOR_CYCLE[i % PROGRAM_COLOR_CYCLE.length];
+        const src = toDriveDirectImg(imageUrl);
+        const topContent = src
+          ? `<img src="${src}" alt="${name}" style="width:100%;height:auto;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+             <div style="display:none;align-items:center;justify-content:center;min-height:160px;font-size:2.4rem;">📌</div>`
+          : `<span style="font-size:3rem;">📌</span>`;
+        return `
+          <div class="program-card">
+            <div class="program-top ${cls}" style="${src ? 'padding:0;overflow:hidden;' : ''}">${topContent}</div>
+            <div class="program-body">
+              <h3>${name}</h3>
+              ${desc ? `<p>${desc}</p>` : ''}
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    async function loadPrograms() {
+      if (!PROGRAMS_APPS_SCRIPT_URL || PROGRAMS_APPS_SCRIPT_URL.includes('YOUR_APPS_SCRIPT')) {
+        renderProgramsFallback(); return;
+      }
+      try {
+        const res = await fetch(PROGRAMS_APPS_SCRIPT_URL, { cache: 'no-store' });
+        const data = await res.json();
+        const items = data.map(r => ({
+          imageUrl:   r.image_url   || '',
+          name:       r.event_name  || '',
+          desc:       r.description || '',
+          colorClass: r.color_class || '',
+        })).filter(r => r.name);
+        if (!items.length) throw new Error('empty');
+        renderProgramCards(items);
+      } catch (e) {
+        console.warn('Programs fetch failed, using fallback:', e.message);
+        renderProgramsFallback();
+      }
+    }
+
+    function renderProgramsFallback() {
+      renderProgramCards([
+        { imageUrl:'', name:'Food Distribution',   desc:'Regular food packets, hot meals, and ration drives for daily-wage workers and underprivileged families in Howrah.', colorClass:'p-orange' },
+        { imageUrl:'', name:'Education Support',   desc:'Distributing books, stationery, and school bags to underprivileged students. Enabling brighter futures one child at a time.', colorClass:'p-green' },
+        { imageUrl:'', name:'Health Camps',        desc:'Free medical check-ups, blood donation drives, and health awareness programs improving community wellness.', colorClass:'p-teal' },
+        { imageUrl:'', name:'Clothing Drive',      desc:'Collecting and distributing warm clothes, blankets, and essentials during winter and disaster situations.', colorClass:'p-cream' },
+        { imageUrl:'', name:'Disaster Relief',     desc:'Rapid response to floods, cyclones, and calamities — providing emergency food, medicine, and shelter materials.', colorClass:'p-yellow' },
+        { imageUrl:'', name:'Awareness Campaigns', desc:'Driving change through campaigns on women\'s rights, environment, and civic responsibilities across Howrah.', colorClass:'p-pink' },
+      ]);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadPrograms);
 
     /* ── FALLING HEARTS ── */
     (function spawnHearts() {
