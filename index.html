@@ -2366,7 +2366,93 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
         <p style="margin-top:12px;font-size:.9rem;">Loading programs…</p>
       </div>
     </div>
+
+    <!-- SEE OUR GALLERY BUTTON -->
+    <div style="text-align:center;margin-top:52px;padding-bottom:8px;">
+      <a href="https://bandhuar01-ngo.github.io/bondhungo/gallery.html" class="gallery-cta-btn">
+        <span class="gallery-btn-icon"><i class="fas fa-images"></i></span>
+        <span class="gallery-btn-text">See Our Gallery</span>
+        <span class="gallery-btn-arrow"><i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
   </section>
+
+  <style>
+    .gallery-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+      color: #fff;
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 16px 36px;
+      border-radius: 50px;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 6px 28px rgba(27,110,63,0.32);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: galleryPulse 2.6s ease-in-out infinite;
+    }
+
+    .gallery-cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 65%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      animation: gallerySweep 2.6s ease-in-out infinite;
+    }
+
+    @keyframes gallerySweep {
+      0%   { left: -100%; }
+      45%  { left: 150%; }
+      100% { left: 150%; }
+    }
+
+    @keyframes galleryPulse {
+      0%, 100% { box-shadow: 0 6px 28px rgba(27,110,63,0.32); }
+      50%       { box-shadow: 0 6px 36px rgba(27,110,63,0.55), 0 0 0 8px rgba(37,138,80,0.08); }
+    }
+
+    .gallery-cta-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 12px 38px rgba(27,110,63,0.45);
+      animation: none;
+    }
+
+    .gallery-cta-btn:hover .gallery-btn-arrow {
+      transform: translateX(5px);
+    }
+
+    .gallery-btn-icon {
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      animation: iconBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes iconBounce {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.18); }
+    }
+
+    .gallery-cta-btn:hover .gallery-btn-icon {
+      animation: none;
+      transform: scale(1.1);
+    }
+
+    .gallery-btn-arrow {
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      transition: transform 0.25s ease;
+    }
+  </style>
 
   <!-- IMPACT -->
   <section class="impact" id="impact">
@@ -2852,14 +2938,35 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
         renderProgramsFallback(); return;
       }
       try {
-        const res = await fetch(PROGRAMS_APPS_SCRIPT_URL, { cache: 'no-store' });
-        const data = await res.json();
-        const items = data.map(r => ({
-          imageUrl:   r.image_url   || '',
-          name:       r.event_name  || '',
-          desc:       r.description || '',
-          colorClass: r.color_class || '',
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+        const res = await fetch(PROGRAMS_APPS_SCRIPT_URL, {
+          cache: 'no-store',
+          signal: controller.signal,
+          mode: 'cors',
+        });
+        clearTimeout(timeout);
+
+        const text = await res.text();
+
+        // Detect HTML error page (Apps Script sometimes returns HTML on misconfiguration)
+        if (!text.trim().startsWith('[') && !text.trim().startsWith('{')) {
+          throw new Error('Non-JSON response');
+        }
+
+        let data;
+        try { data = JSON.parse(text); } catch (e) { throw new Error('JSON parse failed'); }
+
+        // Handle both array of objects and {data:[...]} wrapper
+        const rows = Array.isArray(data) ? data : (data.data || data.programs || data.values || []);
+
+        const items = rows.map(r => ({
+          imageUrl:   r.image_url   || r.imageUrl   || r.image || '',
+          name:       r.event_name  || r.name       || r.title || '',
+          desc:       r.description || r.desc        || '',
+          colorClass: r.color_class || r.colorClass  || '',
         })).filter(r => r.name);
+
         if (!items.length) throw new Error('empty');
         renderProgramCards(items);
       } catch (e) {
@@ -2879,7 +2986,12 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
       ]);
     }
 
-    document.addEventListener('DOMContentLoaded', loadPrograms);
+    document.addEventListener('DOMContentLoaded', () => {
+      // Show fallback immediately so section is never blank
+      renderProgramsFallback();
+      // Then try live data — replaces fallback if successful
+      loadPrograms();
+    });
 
     /* ── FALLING HEARTS ── */
     (function spawnHearts() {
@@ -3130,4 +3242,4 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
   </script>
 </body>
 
-</html>
+</html> 
