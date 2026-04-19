@@ -2172,6 +2172,81 @@
         text-align: center;
       }
     }
+
+     .gallery-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+      color: #fff;
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 16px 36px;
+      border-radius: 50px;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 6px 28px rgba(27,110,63,0.32);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: galleryPulse 2.6s ease-in-out infinite;
+    }
+
+    .gallery-cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 65%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      animation: gallerySweep 2.6s ease-in-out infinite;
+    }
+
+    @keyframes gallerySweep {
+      0%   { left: -100%; }
+      45%  { left: 150%; }
+      100% { left: 150%; }
+    }
+
+    @keyframes galleryPulse {
+      0%, 100% { box-shadow: 0 6px 28px rgba(27,110,63,0.32); }
+      50%       { box-shadow: 0 6px 36px rgba(27,110,63,0.55), 0 0 0 8px rgba(37,138,80,0.08); }
+    }
+
+    .gallery-cta-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 12px 38px rgba(27,110,63,0.45);
+      animation: none;
+    }
+
+    .gallery-cta-btn:hover .gallery-btn-arrow {
+      transform: translateX(5px);
+    }
+
+    .gallery-btn-icon {
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      animation: iconBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes iconBounce {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.18); }
+    }
+
+    .gallery-cta-btn:hover .gallery-btn-icon {
+      animation: none;
+      transform: scale(1.1);
+    }
+
+    .gallery-btn-arrow {
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      transition: transform 0.25s ease;
+    }
   </style>
 </head>
 
@@ -2377,83 +2452,7 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
     </div>
   </section>
 
-  <style>
-    .gallery-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
-      color: #fff;
-      text-decoration: none;
-      font-family: var(--font-body);
-      font-size: 1.05rem;
-      font-weight: 600;
-      padding: 16px 36px;
-      border-radius: 50px;
-      letter-spacing: 0.5px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 6px 28px rgba(27,110,63,0.32);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      animation: galleryPulse 2.6s ease-in-out infinite;
-    }
-
-    .gallery-cta-btn::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 65%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
-      animation: gallerySweep 2.6s ease-in-out infinite;
-    }
-
-    @keyframes gallerySweep {
-      0%   { left: -100%; }
-      45%  { left: 150%; }
-      100% { left: 150%; }
-    }
-
-    @keyframes galleryPulse {
-      0%, 100% { box-shadow: 0 6px 28px rgba(27,110,63,0.32); }
-      50%       { box-shadow: 0 6px 36px rgba(27,110,63,0.55), 0 0 0 8px rgba(37,138,80,0.08); }
-    }
-
-    .gallery-cta-btn:hover {
-      transform: translateY(-3px) scale(1.04);
-      box-shadow: 0 12px 38px rgba(27,110,63,0.45);
-      animation: none;
-    }
-
-    .gallery-cta-btn:hover .gallery-btn-arrow {
-      transform: translateX(5px);
-    }
-
-    .gallery-btn-icon {
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      animation: iconBounce 2s ease-in-out infinite;
-    }
-
-    @keyframes iconBounce {
-      0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.18); }
-    }
-
-    .gallery-cta-btn:hover .gallery-btn-icon {
-      animation: none;
-      transform: scale(1.1);
-    }
-
-    .gallery-btn-arrow {
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      transition: transform 0.25s ease;
-    }
-  </style>
-
+ 
   <!-- IMPACT -->
   <section class="impact" id="impact">
     <div class="section-header">
