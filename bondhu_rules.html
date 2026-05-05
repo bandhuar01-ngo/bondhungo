@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bondhu — Rules & Regulations</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-darkest: #0a1f0e;
+    --green-dark:    #122a17;
+    --green-mid:     #1a3d22;
+    --green-accent:  #2d6a3f;
+    --green-bright:  #4caf6e;
+    --green-soft:    #a8d5b5;
+    --green-pale:    #e8f5ec;
+    --gold:          #c9a84c;
+    --gold-light:    #e8cF87;
+    --cream:         #f7f3eb;
+    --text-light:    #e8ead6;
+    --text-muted:    #8aab90;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--green-darkest);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── Decorative background pattern ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(45,106,63,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 90% 80%, rgba(18,42,23,0.6) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Subtle leaf-vein SVG pattern overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(76,175,110,0.04)' stroke-width='1'%3E%3Cpath d='M30 0 Q45 15 30 30 Q15 45 30 60'/%3E%3Cpath d='M0 30 Q15 15 30 30 Q45 45 60 30'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  /* ─── Header ─── */
+  header {
+    text-align: center;
+    padding-bottom: 3rem;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .logo-ring {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    padding: 6px;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .logo-ring::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 0.5px solid rgba(201,168,76,0.3);
+  }
+
+  .logo-ring img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: contain;
+    background: var(--green-mid);
+  }
+
+  .logo-fallback {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--green-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+
+  .org-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .org-tagline {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 2rem 0;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 0.5px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .divider-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ─── Section heading ─── */
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  /* ─── Rules list ─── */
+  .rules-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .rule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    background: rgba(26,61,34,0.45);
+    border: 0.5px solid rgba(76,175,110,0.18);
+    border-left: 2px solid var(--green-accent);
+    border-radius: 10px;
+    padding: 16px 20px;
+    transition: background 0.25s, border-left-color 0.25s, transform 0.2s;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .rule-item:hover {
+    background: rgba(45,106,63,0.35);
+    border-left-color: var(--gold);
+    transform: translateX(4px);
+  }
+
+  .rule-item:nth-child(1)  { animation-delay: 0.05s; }
+  .rule-item:nth-child(2)  { animation-delay: 0.10s; }
+  .rule-item:nth-child(3)  { animation-delay: 0.15s; }
+  .rule-item:nth-child(4)  { animation-delay: 0.20s; }
+  .rule-item:nth-child(5)  { animation-delay: 0.25s; }
+  .rule-item:nth-child(6)  { animation-delay: 0.30s; }
+  .rule-item:nth-child(7)  { animation-delay: 0.35s; }
+  .rule-item:nth-child(8)  { animation-delay: 0.40s; }
+  .rule-item:nth-child(9)  { animation-delay: 0.45s; }
+  .rule-item:nth-child(10) { animation-delay: 0.50s; }
+  .rule-item:nth-child(11) { animation-delay: 0.55s; }
+
+  .rule-num {
+    min-width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--green-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--green-soft);
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+  }
+
+  .rule-item:hover .rule-num {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+
+  .rule-text {
+    font-size: 14.5px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+
+  .rule-text em {
+    font-style: italic;
+    color: var(--green-soft);
+  }
+
+  /* ─── Footer ─── */
+  footer {
+    text-align: center;
+    margin-top: 3.5rem;
+    font-size: 11.5px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    animation: fadeUp 0.8s 0.7s ease both;
+  }
+
+  footer span {
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  /* ─── Animations ─── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 500px) {
+    .org-name { font-size: 36px; letter-spacing: 4px; }
+    .page-wrapper { padding: 2rem 1rem 4rem; }
+    .rule-text { font-size: 13.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <header>
+    <div class="logo-ring">
+      <img
+        src="https://raw.githubusercontent.com/bandhuar01-ngo/bondhungo/main/Bondhu_logo.png"
+        alt="Bondhu Logo"
+        onerror="this.parentElement.innerHTML='<div class=\'logo-fallback\'>B</div>'"
+      />
+    </div>
+    <h1 class="org-name">Bondhu</h1>
+    <p class="org-tagline">Govt. Registration No: IV-190200035/2022</p>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <p class="section-heading">Rules &amp; Regulations</p>
+  </header>
+
+  <ul class="rules-list">
+    <li class="rule-item">
+      <span class="rule-num">1</span>
+      <p class="rule-text">Every member must adhere to all the rules and regulations stated in the <em>Articles of Association for the Trust</em> of the organization.</p>
+    </li>
+    <li class="rule-item">
+      <span class="rule-num">2</span>
+      <p class="rule-text">During any project, members must strictly follow the decisions made by the Project Head, Sub-Committee, or Core Committee.</p>
+    </li>
+    <li class="rule-item">
+      <span class="rule-num">3</span>
+      <p class="rule-text">Members will not have any voting rights in the Annual General Meeting (AGM); however, their opinions for the betterment of the organization will be warmly welcomed.</p>
+    </li>
+    <li class="rule-item">
+      <span class="rule-num">4</span>
+      <p class="rule-text">Each member must pay a monthly subscription of ₹50 (₹600 annually).</p>
+    </li>
+    <li class="rule-item">
+      <span class="rule-num">5</span>
+      <p class="rule-text">Members are required to be present in at least half of the total projects conducted during the financial year.</p>
+    </li>
+    <li class="rule-item">
+      <span class="rule-num">6</span>
+      <p class="rule-text">Certificates will be awarded at the Annual General Meeting (AGM) based on members' performance.</p>
+    </li>
+    <li class="rule-item">
+      <span class="rule-num">7</span>
+      <p class="rule-text">Each member will be provided with an identity card (ID Card).</p>
+    </li>
+    <li class="rule-item">
+      <span class="rule-num">8</span>
+      <p class="rule-text">Volunteership must be renewed every 2 years, and the renewal process will be completely free of cost.</p>
+    </li>
+    <li class="rule-item">
+      <span class="rule-num">9</span>
+      <p class="rule-text">Members will be informed in advance about all projects of the organization.</p>
+    </li>
+    <li class="rule-item">
+      <span class="rule-num">10</span>
+      <p class="rule-text">Active cooperation from all members is highly expected.</p>
+    </li>
+    <li class="rule-item">
+      <span class="rule-num">11</span>
+      <p class="rule-text">If any member violates the rules of the organization, the Core Committee will take immediate action, and their decision will be considered final.</p>
+    </li>
+  </ul>
+
+  <footer>
+    <div class="divider" style="margin-bottom: 1.5rem;">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line"></div>
+    </div>
+<span>©</span> 
+<a 
+  href="https://bondhungo.org" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  style="color: #FFD54F; font-weight: bold;"
+>
+  Bondhu</a>
+&nbsp;·&nbsp; All Rights Reserved  </footer>
+
+</div>
+</body>
+</html>
