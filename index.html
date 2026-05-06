@@ -1340,64 +1340,126 @@
     }
 
     /* ── PEOPLE HELPED ── */
+    /* ── PEOPLE / COMMITTEE ── */
     .people {
       background: #fff;
     }
 
-    .people-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
+    /* Year tab bar */
+    .year-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
     }
 
+    .year-tab {
+      background: var(--cream);
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      padding: 7px 22px;
+      font-size: .84rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all .2s;
+      font-family: var(--font-body);
+    }
+
+    .year-tab:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .year-tab.active {
+      background: var(--green-dark);
+      border-color: var(--green-dark);
+      color: #fff;
+    }
+
+    /* Unified rows */
+    .committee-trustee-row,
+    .people-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-bottom: 28px;
+    }
+
+    /* Card - identical for everyone */
     .person-card {
       background: var(--cream);
-      border: 1px solid var(--cream-dark);
-      border-radius: 18px;
-      padding: 28px 24px;
+      border: 2px solid var(--orange-light);
+      border-radius: 20px;
+      padding: 28px 20px 22px;
       text-align: center;
       transition: all .3s;
+      width: 170px;
+      flex-shrink: 0;
     }
 
     .person-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow);
-      border-color: var(--border);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(27,110,63,.13);
+      border-color: var(--orange);
     }
 
+    /* Circle photo */
     .person-avatar {
-      width: 70px;
-      height: 70px;
-      background: var(--green-pale);
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 14px;
+      border: 3px solid var(--orange-light);
+      background: var(--green-pale);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      margin: 0 auto 16px;
-      border: 2px solid var(--border);
+    }
+
+    .person-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .person-avatar .avatar-placeholder {
+      font-size: 2.2rem;
+      color: var(--green);
+      line-height: 1;
     }
 
     .person-card h4 {
-      font-size: .98rem;
-      font-weight: 600;
+      font-size: .9rem;
+      font-weight: 700;
       margin-bottom: 4px;
+      color: var(--text-dark);
+      line-height: 1.3;
     }
 
     .person-card .role {
-      font-size: .76rem;
+      font-size: .72rem;
       color: var(--orange);
       font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+      line-height: 1.4;
     }
 
-    .person-card p {
-      font-size: .81rem;
-      color: var(--text-mid);
-      line-height: 1.7;
+    /* Hide divider label */
+    .committee-section-label { display: none; }
+
+    /* Loading / error states */
+    .people-loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-light);
+      font-size: .9rem;
     }
+
+    .people-loading i { font-size: 1.8rem; display: block; margin-bottom: 12px; animation: spin 1.2s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ── GALLERY ── */
     .gallery {
@@ -2114,8 +2176,7 @@
       }
 
       .programs-grid,
-      .events-grid,
-      .people-grid {
+      .events-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -2151,8 +2212,7 @@
 
     @media(max-width:600px) {
 
-      .programs-grid,
-      .people-grid {
+      .programs-grid {
         grid-template-columns: 1fr;
       }
 
@@ -2499,125 +2559,93 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
         </div>
       </div>
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-emoji">🍚</div>
-          <div class="tl-date">2018 — First Drive</div>
-          <h3>First Food Distribution Drive</h3>
-          <p>Bondhu conducted its first formal food distribution, delivering meals and rations to over 80 daily-wage
-            families in the Ramrajatala locality.</p>
-          <span class="tl-tag">Food Relief</span>
-        </div>
-      </div>
+  <div class="tl-item">
+  <div class="tl-dot"></div>
+  <div class="tl-card">
+    <div class="tl-emoji">🎉</div>
+    <div class="tl-date">2017 — First Initiative</div>
+    <h3>Oder Pujo</h3>
+    <p>Bondhu began its journey with Oder Pujo, spreading festive happiness by distributing brand-new colorful clothes to street dwellers and underprivileged children during Durga Puja across Bengal.</p>
+    <span class="tl-tag">Festival Support</span>
+  </div>
+</div>
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-emoji">👕</div>
-          <div class="tl-date">November 2019</div>
-          <h3>Winter Clothing Drive</h3>
-          <p>Collected and distributed blankets, woolens, and warm clothing to over 150 people across Howrah ahead of
-            the winter season.</p>
-          <span class="tl-tag">Clothing</span>
-        </div>
-      </div>
+<div class="tl-item">
+  <div class="tl-dot"></div>
+  <div class="tl-card">
+    <div class="tl-emoji">📚</div>
+    <div class="tl-date">2019 — Education Drive</div>
+    <h3>Upohar</h3>
+    <p>Through Upohar, Bondhu empowered underprivileged students with books, stationery, and school bags, helping young minds continue their education with confidence.</p>
+    <span class="tl-tag">Education</span>
+  </div>
+</div>
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-emoji">🦠</div>
-          <div class="tl-date">2020 — COVID Response</div>
-          <h3>Pandemic Relief Operations</h3>
-          <p>During the COVID-19 lockdowns, Bondhu distributed dry rations, masks, and sanitizers to hundreds of
-            vulnerable households in Howrah's most affected localities.</p>
-          <span class="tl-tag">Disaster Relief</span>
-        </div>
-      </div>
+<div class="tl-item">
+  <div class="tl-dot"></div>
+  <div class="tl-card">
+    <div class="tl-emoji">🍲</div>
+    <div class="tl-date">2020 — Community Food Support</div>
+    <h3>Bhalobeshe Ahare</h3>
+    <p>Bhalobeshe Ahare turned celebrations into acts of kindness by distributing meals and food support to people in need, bringing smiles through shared humanity.</p>
+    <span class="tl-tag">Food Relief</span>
+  </div>
+</div>
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-emoji">🌀</div>
-          <div class="tl-date">May 2021 — Cyclone Yaas</div>
-          <h3>Cyclone Yaas Emergency Relief</h3>
-          <p>Mobilized within hours of Cyclone Yaas striking West Bengal — distributed food packets, tarpaulins, and
-            emergency kits to displaced families.</p>
-          <span class="tl-tag">Disaster Relief</span>
-        </div>
-      </div>
+<div class="tl-item">
+  <div class="tl-dot"></div>
+  <div class="tl-card">
+    <div class="tl-emoji">💊</div>
+    <div class="tl-date">2020 — Care & Support</div>
+    <h3>Nivedan</h3>
+    <p>Nivedan extended support to underserved communities in Howrah through medicines, meals, and ration distribution, ensuring care reached those who needed it most.</p>
+    <span class="tl-tag">Healthcare</span>
+  </div>
+</div>
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-emoji">📚</div>
-          <div class="tl-date">September 2022</div>
-          <h3>Books &amp; School Supplies Drive</h3>
-          <p>Supplied school books, bags, and stationery to 80+ underprivileged students ahead of the new academic year,
-            giving their education a fresh start.</p>
-          <span class="tl-tag">Education</span>
-        </div>
-      </div>
+<div class="tl-item">
+  <div class="tl-dot"></div>
+  <div class="tl-card">
+    <div class="tl-emoji">🌀</div>
+    <div class="tl-date">2020–2021 — Emergency Response</div>
+    <h3>Disaster Relief</h3>
+    <p>During devastating cyclones like Amphan and Yaas, Bondhu stood beside affected families by distributing emergency supplies, dry food, and essential relief materials across Bengal.</p>
+    <span class="tl-tag">Disaster Relief</span>
+  </div>
+</div>
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-emoji">👕</div>
-          <div class="tl-date">November 2022</div>
-          <h3>Winter Clothing Drive</h3>
-          <p>Distributed blankets, woolens, and warm clothing to over 300 people — our largest clothing drive to date.
-          </p>
-          <span class="tl-tag">Clothing</span>
-        </div>
-      </div>
+<div class="tl-item">
+  <div class="tl-dot"></div>
+  <div class="tl-card">
+    <div class="tl-emoji">🩸</div>
+    <div class="tl-date">2021 — Community Health Initiative</div>
+    <h3>Roktodan Utsab</h3>
+    <p>Roktodan Utsab promoted voluntary blood donation while also organizing free health, eye, and dental check-up camps for the local community.</p>
+    <span class="tl-tag">Blood Donation</span>
+  </div>
+</div>
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-emoji">🌊</div>
-          <div class="tl-date">July 2023</div>
-          <h3>Flood Relief — Howrah Response</h3>
-          <p>Emergency response during the 2023 floods — dry food packets, drinking water, and medicines distributed to
-            flood-hit families across Howrah.</p>
-          <span class="tl-tag">Disaster Relief</span>
-        </div>
-      </div>
+<div class="tl-item">
+  <div class="tl-dot"></div>
+  <div class="tl-card">
+    <div class="tl-emoji">🧥</div>
+    <div class="tl-date">2022 — Winter Support Drive</div>
+    <h3>Himel Upohar</h3>
+    <p>Himel Upohar brought warmth to street dwellers and underprivileged children by distributing winter clothes and blankets during the harsh winter season.</p>
+    <span class="tl-tag">Winter Relief</span>
+  </div>
+</div>
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-emoji">🩺</div>
-          <div class="tl-date">December 2023</div>
-          <h3>Free Health Check-up Camp</h3>
-          <p>A free medical camp with local doctors, providing consultations, medicines, and health tests to 150+
-            residents in Ramrajatala.</p>
-          <span class="tl-tag">Healthcare</span>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-emoji">🍱</div>
-          <div class="tl-date">January 2024</div>
-          <h3>Winter Food Distribution Drive</h3>
-          <p>Distributed hot meals and food packets to over 200 families and daily-wage laborers in Ramrajatala and
-            nearby areas during peak winter.</p>
-          <span class="tl-tag">Food Relief</span>
-        </div>
-      </div>
-
-      <div class="tl-item milestone">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-emoji">🌟</div>
-          <div class="tl-date">2025 — Present</div>
-          <h3>Continuing the Mission</h3>
-          <p>Bondhu continues to grow — with new volunteers, new drives, and an expanding reach across Howrah. The
-            journey of friendship goes on.</p>
-          <span class="tl-tag">Milestone</span>
-        </div>
-      </div>
+<div class="tl-item">
+  <div class="tl-dot"></div>
+  <div class="tl-card">
+    <div class="tl-emoji">👗</div>
+    <div class="tl-date">2026 — Rural Women Support</div>
+    <h3>Rangamatir Hansi</h3>
+    <p>Rangamatir Hansi celebrated dignity and compassion by distributing new sarees to underprivileged mothers and women across rural Bengal.</p>
+    <span class="tl-tag">Women Empowerment</span>
+  </div>
+</div>
 
     </div>
   </section>
@@ -2631,37 +2659,13 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
       <h2 class="section-title">The People Behind Bondhu</h2>
       <p class="section-sub">Meet the dedicated individuals who volunteer their time, heart, and energy to serve our community.</p>
     </div>
-    <div class="people-grid">
-      <div class="person-card">
-        <div class="person-avatar">👨‍💼</div>
-        <h4>Anirban Roy</h4>
-        <div class="role">🏅 Founder &amp; President</div>
-        <p>"Leading Bondhu with vision and compassion since 2017."</p>
-      </div>
-      <div class="person-card">
-        <div class="person-avatar">👨‍💼</div>
-        <h4>Team Member</h4>
-        <div class="role">🌟 Vice President</div>
-        <p>"Supporting every initiative with dedication and leadership."</p>
-      </div>
-      <div class="person-card">
-        <div class="person-avatar">👩‍💼</div>
-        <h4>Team Member</h4>
-        <div class="role">📋 Secretary</div>
-        <p>"Keeping our operations organized and our mission on track."</p>
-      </div>
-      <div class="person-card">
-        <div class="person-avatar">👨‍💼</div>
-        <h4>Team Member</h4>
-        <div class="role">💰 Treasurer</div>
-        <p>"Ensuring every rupee is accounted for and well-spent."</p>
-      </div>
-      <div class="person-card">
-        <div class="person-avatar">🧑‍🤝‍🧑</div>
-        <h4>Our Volunteers</h4>
-        <div class="role">❤️ Core Volunteer Team</div>
-        <p>"50+ volunteers across Howrah — the backbone of all our drives."</p>
-      </div>
+
+    <!-- Year tabs (populated dynamically) -->
+    <div class="year-tabs" id="yearTabs"></div>
+
+    <!-- Members container -->
+    <div id="committeeWrap">
+      <div class="people-loading"><i class="fas fa-spinner"></i>Loading committee…</div>
     </div>
   </section>
 
@@ -3054,6 +3058,157 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
     }
 
 
+    /* ── COMMITTEE / MEMBERS ── */
+
+    const COMMITTEE_GSHEET_URL = 'https://script.google.com/macros/s/AKfycbxMjdeOxgj6uybUQEozPnRcgmWB5K_MuCBvy13ezkZrDuEyEwQCK3fvyCbaCsjYuAUh/exec';
+
+    // Trustee-tier designations (shown in top row with gold border)
+    const TRUSTEE_ROLES = ['president', 'secretary', 'treasurer', 'trustee'];
+
+    function isTrustee(desig) {
+      const d = (desig || '').toLowerCase();
+      return TRUSTEE_ROLES.some(r => d.includes(r));
+    }
+
+    // Convert any Google Drive share/view URL → direct embed URL
+    function driveDirectUrl(url) {
+      if (!url) return '';
+      // Already direct
+      if (url.includes('drive.google.com/uc?') || url.includes('lh3.googleusercontent')) return url;
+      // Share link: /file/d/FILE_ID/view → uc?export=view&id=FILE_ID
+      const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      if (m) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
+      // open?id= format
+      const m2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (m2) return `https://drive.google.com/uc?export=view&id=${m2[1]}`;
+      return url;
+    }
+
+    function avatarHtml(imgUrl, name) {
+      const src = driveDirectUrl(imgUrl);
+      if (src) {
+        return `<img src="${src}" alt="${name}" loading="lazy" onerror="this.parentNode.innerHTML='<span class=\\'avatar-placeholder\\'>👤</span>'">`;
+      }
+      return `<span class="avatar-placeholder">👤</span>`;
+    }
+
+    function buildCard(member) {
+      return `
+        <div class="person-card">
+          <div class="person-avatar">${avatarHtml(member.imageLink || member.shareLink, member.name)}</div>
+          <h4>${member.name}</h4>
+          <div class="role">${member.designation}</div>
+        </div>`;
+    }
+
+    function renderCommittee(rows, year) {
+      const wrap = document.getElementById('committeeWrap');
+      // Trim both sides so whitespace variation in sheet never causes mismatch
+      const filtered = rows.filter(r => !year || r.year.trim() === String(year).trim());
+
+      if (!filtered.length) {
+        wrap.innerHTML = `<p style="text-align:center;color:var(--text-light);padding:32px">No members found for ${year}.</p>`;
+        return;
+      }
+
+      const trustees = filtered.filter(m => isTrustee(m.designation));
+      const others   = filtered.filter(m => !isTrustee(m.designation));
+
+      let html = '';
+      if (trustees.length) html += `<div class="committee-trustee-row">${trustees.map(m => buildCard(m)).join('')}</div>`;
+      if (others.length)   html += `<div class="people-grid">${others.map(m => buildCard(m)).join('')}</div>`;
+
+      wrap.innerHTML = html;
+    }
+
+    function buildYearTabs(years, allRows) {
+      const tabBar = document.getElementById('yearTabs');
+      if (!years.length) { tabBar.style.display = 'none'; return; }
+
+      // years already sorted newest-first by loadCommittee
+      tabBar.innerHTML = years.map((y, i) =>
+        `<button class="year-tab${i === 0 ? ' active' : ''}" data-year="${y}" onclick="selectYear('${y}',this)">${y}</button>`
+      ).join('');
+
+      window._committeeRows = allRows;
+      renderCommittee(allRows, years[0]);
+    }
+
+    window.selectYear = function(year, btn) {
+      document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      renderCommittee(window._committeeRows || [], year);
+    };
+
+    async function loadCommittee() {
+      const wrap = document.getElementById('committeeWrap');
+      try {
+        const res = await fetch(COMMITTEE_GSHEET_URL, { cache: 'no-store' });
+        const text = await res.text();
+        const data = JSON.parse(text.replace(/```json|```/g, '').trim());
+
+        // Normalise: 2D array (Apps Script) OR array of objects
+        let rows;
+        if (Array.isArray(data) && data.length && Array.isArray(data[0])) {
+          const start = String(data[0][0]).toLowerCase().trim() === 'name' ? 1 : 0;
+          rows = data.slice(start).map(r => ({
+            name:        String(r[0] || '').trim(),
+            designation: String(r[1] || '').trim(),
+            imageLink:   String(r[2] || '').trim(),
+            fileId:      String(r[3] || '').trim(),
+            shareLink:   String(r[4] || '').trim(),
+            year:        String(r[5] || '').trim()
+          }));
+        } else {
+          rows = data.map(r => ({
+            name:        String(r.name        || '').trim(),
+            designation: String(r.designation || '').trim(),
+            imageLink:   String(r.imageLink   || '').trim(),
+            fileId:      String(r.fileId      || '').trim(),
+            shareLink:   String(r.shareLink   || '').trim(),
+            year:        String(r.year        || '').trim()
+          }));
+        }
+
+        // Drop blank rows (name OR designation missing)
+        rows = rows.filter(r => r.name && r.designation);
+        if (!rows.length) throw new Error('empty');
+
+        // Year sparse — only first row of each year-group has value.
+        // Carry last seen year forward to all following rows.
+        let lastYear = '';
+        rows = rows.map(r => {
+          if (r.year) lastYear = r.year;
+          return { ...r, year: lastYear };
+        });
+
+        // Unique years, sort newest first by leading 4-digit number
+        const years = [...new Set(rows.map(r => r.year).filter(Boolean))]
+          .sort((a, b) => (parseInt(b) || 0) - (parseInt(a) || 0));
+
+        buildYearTabs(years, rows);
+        if (!years.length) renderCommittee(rows, null);
+
+      } catch (e) {
+        console.warn('Committee fetch failed:', e);
+        const fallback = [
+          { name:'Sayon Nandy',      designation:'President (Trustee)',        imageLink:'', year:'2026 -2027' },
+          { name:'Surojit Bose',     designation:'Secretary (Trustee)',         imageLink:'', year:'2026 -2027' },
+          { name:'Subhadip Maity',   designation:'Treasurer (Trustee)',         imageLink:'', year:'2026 -2027' },
+          { name:'Gourab Dutta',     designation:'Assistant Secretary',         imageLink:'', year:'2026 -2027' },
+          { name:'Koushik Mondal',   designation:'Group Director',              imageLink:'', year:'2026 -2027' },
+          { name:'Subhajit Koley',   designation:'Assistant Treasurer',         imageLink:'', year:'2026 -2027' },
+          { name:'Soumyajit Chandra',designation:'Digital Media Coordinator',   imageLink:'', year:'2026 -2027' },
+          { name:'Sourav Som',       designation:'Event Manager',               imageLink:'', year:'2026 -2027' },
+          { name:'Srija Ghosh',      designation:'Body Member',                 imageLink:'', year:'2026 -2027' },
+          { name:'Soumyadeep Maity', designation:'Body Member',                 imageLink:'', year:'2026 -2027' },
+        ];
+        buildYearTabs(['2026 -2027'], fallback);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadCommittee);
+
     const IMPACT_URL = 'https://script.google.com/macros/s/AKfycbwaiCo68XVMyLo3JLCc7yIJGh1snKVj4EDz3VlRMCQDfi-AlPOrDs186EiF0j3as89n/exec';
 
     // Counting animation
@@ -3250,4 +3405,4 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
   </script>
 </body>
 
-</html> 
+</html>
