@@ -233,13 +233,54 @@
       border: 1px solid var(--border);
       position: sticky;
       top: 90px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
     }
+    .rules-sidebar::-webkit-scrollbar { width: 5px; }
+    .rules-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+    .rules-preview {
+      position: relative;
+    }
+    .rules-preview.clamped::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 72px;
+      background: linear-gradient(to bottom, transparent, var(--white));
+      pointer-events: none;
+    }
+    .rules-extra {
+      display: none;
+    }
+    .rules-extra.open {
+      display: block;
+    }
+    .see-more-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--green);
+      padding: 0;
+    }
+    .see-more-btn:hover { color: var(--green-dark); }
+    .see-more-btn i { font-size: 0.72rem; transition: .2s; }
+    .see-more-btn.open i { transform: rotate(180deg); }
 
     .rules-sidebar h3 {
       font-family: var(--font-head);
       font-size: 1.15rem;
       color: var(--green-dark);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -258,18 +299,19 @@
     }
 
     .rule-num {
-      width: 24px;
-      height: 24px;
+      min-width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: var(--green-pale);
       color: var(--green);
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
       margin-top: 1px;
+      padding: 0 4px;
     }
 
     .rule-text {
@@ -803,7 +845,10 @@
 
       .rules-sidebar {
         position: static;
+        max-height: none;
+        overflow: visible;
       }
+      /* rules handled by see-more */
 
       .form-section {
         padding: 20px 16px;
@@ -902,51 +947,58 @@
 
     <!-- LEFT: RULES SIDEBAR -->
     <aside class="rules-sidebar">
-      <h3><i class="fas fa-scroll"></i> Rules & Regulations</h3>
-      <div class="rule-item">
-        <div class="rule-num">1</div>
-        <div class="rule-text">Every member must adhere to all rules stated in the <em>Articles of Association for the Trust</em>.</div>
+      <h3><i class="fas fa-scroll"></i> Rules &amp; Regulations</h3>
+      <div class="rules-preview clamped" id="rulesPreview">
+        <div class="rule-item">
+          <div class="rule-num">1</div>
+          <div class="rule-text">Every member must adhere to all rules stated in the <em>Articles of Association for the Trust</em>.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">2</div>
+          <div class="rule-text">During any project, members must strictly follow decisions made by the Project Head, Sub-Committee, or Core Committee.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">3</div>
+          <div class="rule-text">Members have no voting rights at the AGM; however, their opinions for the betterment of the organization are warmly welcomed.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">4</div>
+          <div class="rule-text">Each member must pay a monthly subscription of ₹50 (₹600 annually).</div>
+        </div>
+        <div class="rules-extra" id="rulesExtra">
+          <div class="rule-item">
+            <div class="rule-num">5</div>
+            <div class="rule-text">Members must be present in at least half of all projects conducted during the financial year.</div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">6</div>
+            <div class="rule-text">Certificates will be awarded at the AGM based on members' performance.</div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">7</div>
+            <div class="rule-text">Each member will be provided with an Identity Card (ID Card).</div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">8</div>
+            <div class="rule-text">Volunteership must be renewed every 2 years; renewal is completely free of cost.</div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">9</div>
+            <div class="rule-text">Members will be informed in advance about all projects of the organization.</div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">10</div>
+            <div class="rule-text">Active cooperation from all members is highly expected.</div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">11</div>
+            <div class="rule-text">If any member violates the rules, the Core Committee will take immediate action, and their decision will be final.</div>
+          </div>
+        </div>
       </div>
-      <div class="rule-item">
-        <div class="rule-num">2</div>
-        <div class="rule-text">During any project, members must strictly follow decisions made by the Project Head, Sub-Committee, or Core Committee.</div>
-      </div>
-      <div class="rule-item">
-        <div class="rule-num">3</div>
-        <div class="rule-text">Members have no voting rights at the AGM; however, their opinions for the betterment of the organization are warmly welcomed.</div>
-      </div>
-      <div class="rule-item">
-        <div class="rule-num">4</div>
-        <div class="rule-text">Each member must pay a monthly subscription of ₹50 (₹600 annually).</div>
-      </div>
-      <div class="rule-item">
-        <div class="rule-num">5</div>
-        <div class="rule-text">Members must be present in at least half of all projects conducted during the financial year.</div>
-      </div>
-      <div class="rule-item">
-        <div class="rule-num">6</div>
-        <div class="rule-text">Certificates will be awarded at the AGM based on members' performance.</div>
-      </div>
-      <div class="rule-item">
-        <div class="rule-num">7</div>
-        <div class="rule-text">Each member will be provided with an Identity Card (ID Card).</div>
-      </div>
-      <div class="rule-item">
-        <div class="rule-num">8</div>
-        <div class="rule-text">Volunteership must be renewed every 2 years; renewal is completely free of cost.</div>
-      </div>
-      <div class="rule-item">
-        <div class="rule-num">9</div>
-        <div class="rule-text">Members will be informed in advance about all projects of the organization.</div>
-      </div>
-      <div class="rule-item">
-        <div class="rule-num">10</div>
-        <div class="rule-text">Active cooperation from all members is highly expected.</div>
-      </div>
-      <div class="rule-item">
-        <div class="rule-num">11</div>
-        <div class="rule-text">If any member violates the rules, the Core Committee will take immediate action, and their decision will be final.</div>
-      </div>
+      <button class="see-more-btn" id="seeMoreBtn" onclick="toggleSeeMore()">
+        <span id="seeMoreLabel">See more</span> <i class="fas fa-chevron-down"></i>
+      </button>
       <hr class="rule-divider">
       <div class="pledge-box">
         <p>"I pledge to serve with honesty, compassion, and dedication — for a better community, together."</p>
@@ -1319,6 +1371,16 @@
         const field = wrap.querySelector('input, select, textarea');
         if (field) field.classList.remove('error');
       }
+    }
+    function toggleSeeMore() {
+      const extra = document.getElementById('rulesExtra');
+      const preview = document.getElementById('rulesPreview');
+      const btn = document.getElementById('seeMoreBtn');
+      const label = document.getElementById('seeMoreLabel');
+      const isOpen = extra.classList.toggle('open');
+      preview.classList.toggle('clamped', !isOpen);
+      btn.classList.toggle('open', isOpen);
+      label.textContent = isOpen ? 'See less' : 'See more';
     }
     function fieldVal(id) { return document.getElementById(id)?.value?.trim() || ''; }
 
