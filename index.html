@@ -1386,6 +1386,7 @@
       flex-wrap: wrap;
       gap: 28px;
       margin-bottom: 28px;
+      overflow: visible;
     }
 
     /* Card - identical for everyone */
@@ -1400,11 +1401,7 @@
       flex-shrink: 0;
     }
 
-    .person-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 36px rgba(27,110,63,.13);
-      border-color: var(--orange);
-    }
+
 
     /* Circle photo */
     .person-avatar {
@@ -1418,6 +1415,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: border-radius .3s cubic-bezier(.34,1.4,.64,1);
+    }
+
+    .person-card:hover .person-avatar {
+      border-radius: 16px;
     }
 
     .person-avatar img {
@@ -1445,6 +1447,23 @@
       color: var(--orange);
       font-weight: 600;
       line-height: 1.4;
+    }
+
+    /* ── CARD INFLATE ON HOVER ── */
+    .person-card {
+      transition: transform .3s cubic-bezier(.34,1.4,.64,1), box-shadow .3s ease, z-index 0s;
+      z-index: 1;
+      position: relative;
+    }
+
+    .person-card:hover {
+      transform: scale(1.45);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+      z-index: 50;
+    }
+
+    .person-avatar {
+      transition: none;
     }
 
     /* Hide divider label */
@@ -3070,22 +3089,35 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
       return TRUSTEE_ROLES.some(r => d.includes(r));
     }
 
-    // Convert any Google Drive share/view URL → direct embed URL
+    // Extract Google Drive file ID from any Drive URL
+    function extractDriveId(url) {
+      if (!url) return '';
+      // /file/d/FILE_ID/
+      const m1 = url.match(/\/d\/([a-zA-Z0-9_-]{10,})/);
+      if (m1) return m1[1];
+      // ?id=FILE_ID or &id=FILE_ID (thumbnail, open, uc URLs)
+      const m2 = url.match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
+      if (m2) return m2[1];
+      return '';
+    }
+
+    // Convert any Google Drive URL → thumbnail URL (most reliable for <img> embeds)
     function driveDirectUrl(url) {
       if (!url) return '';
-      // Already direct
-      if (url.includes('drive.google.com/uc?') || url.includes('lh3.googleusercontent')) return url;
-      // Share link: /file/d/FILE_ID/view → uc?export=view&id=FILE_ID
-      const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-      if (m) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
-      // open?id= format
-      const m2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-      if (m2) return `https://drive.google.com/uc?export=view&id=${m2[1]}`;
+      // Already an lh3 CDN URL — use as-is
+      if (url.includes('lh3.googleusercontent')) return url;
+      // Already a thumbnail URL — use as-is (col C format)
+      if (url.includes('drive.google.com/thumbnail') || url.includes('drive.google.com/th')) return url;
+      // Extract file ID and build thumbnail URL
+      const id = extractDriveId(url);
+      if (id) return `https://drive.google.com/thumbnail?id=${id}&sz=w400`;
       return url;
     }
 
-    function avatarHtml(imgUrl, name) {
-      const src = driveDirectUrl(imgUrl);
+    function avatarHtml(imgUrl, fileId, name) {
+      // Priority: col C imageLink → fileId (col D) fallback → col E shareLink fallback
+      let src = driveDirectUrl(imgUrl);
+      if (!src && fileId) src = `https://drive.google.com/thumbnail?id=${fileId}&sz=w400`;
       if (src) {
         return `<img src="${src}" alt="${name}" loading="lazy" onerror="this.parentNode.innerHTML='<span class=\\'avatar-placeholder\\'>👤</span>'">`;
       }
@@ -3095,7 +3127,7 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
     function buildCard(member) {
       return `
         <div class="person-card">
-          <div class="person-avatar">${avatarHtml(member.imageLink || member.shareLink, member.name)}</div>
+          <div class="person-avatar">${avatarHtml(member.imageLink, member.fileId, member.name)}</div>
           <h4>${member.name}</h4>
           <div class="role">${member.designation}</div>
         </div>`;
