@@ -55,7 +55,7 @@
     body {
       font-family: var(--font-body);
       color: var(--text-dark);
-      background: var(--white);
+      background: var(--green-dark);
     }
 
     img {
@@ -87,7 +87,6 @@
       justify-content: space-between;
       padding: 0 5%;
       box-shadow: 0 3px 16px rgba(0, 0, 0, 0.22);
-      overflow: visible;
     }
 
     .logo-area {
@@ -455,6 +454,287 @@
       color: var(--text-dark);
     }
 
+    /* ── STORY BANNER POPUP ── */
+    .story-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      background: rgba(10, 20, 14, 0.35);
+      backdrop-filter: blur(18px) saturate(120%);
+      -webkit-backdrop-filter: blur(18px) saturate(120%);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .story-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .story-card {
+      position: relative;
+      width: min(94vw, 400px);
+      height: min(88vh, 720px);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      animation: storyPop .28s cubic-bezier(.2,.9,.3,1.3);
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+    }
+
+    @keyframes storyPop {
+      from { transform: scale(.88); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .story-bars {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      z-index: 5;
+      display: flex;
+      gap: 5px;
+    }
+
+    .story-bar {
+      flex: 1;
+      height: 3px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.35);
+      overflow: hidden;
+    }
+
+    .story-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      border-radius: 3px;
+    }
+
+    .story-bar-fill.filling {
+      animation-name: storyFill;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes storyFill {
+      from { width: 0%; }
+      to   { width: 100%; }
+    }
+
+    .story-close {
+      position: absolute;
+      top: 22px;
+      right: 12px;
+      z-index: 6;
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.35);
+      color: #fff;
+      font-size: 1.15rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+
+    .story-days {
+      position: absolute;
+      top: 62px;
+      right: 12px;
+      z-index: 6;
+      max-width: calc(100% - 60px);
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 6px 11px;
+      border-radius: 50px;
+      display: none;
+      align-items: center;
+      gap: 5px;
+      letter-spacing: .2px;
+      text-align: right;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .story-days.show { display: inline-flex; }
+
+    .story-nav-zone {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 45%;
+      z-index: 4;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+
+    .story-nav-zone.left  { left: 0; }
+    .story-nav-zone.right { right: 0; }
+
+    .story-actions {
+      position: absolute;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      z-index: 5;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .story-donate-btn,
+    .story-contact-btn {
+      background: var(--orange, #d97726);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 9px 28px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: .3px;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .story-contact-btn {
+      background: transparent;
+      border: 1.5px solid #fff;
+      box-shadow: none;
+    }
+
+    .story-donate-btn:active,
+    .story-contact-btn:active {
+      transform: scale(.96);
+    }
+
+    .story-media-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .story-media-bg {
+      position: absolute;
+      inset: -20px;
+      width: calc(100% + 40px);
+      height: calc(100% + 40px);
+      object-fit: cover;
+      filter: blur(28px) brightness(0.55);
+      transform: scale(1.1);
+    }
+
+    .story-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      z-index: 1;
+    }
+
+    .story-scrim {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 45%;
+      z-index: 2;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
+      pointer-events: none;
+    }
+
+    /* ── MOBILE: full-screen, edge-to-edge story ── */
+    @media (max-width: 480px) {
+      .story-overlay {
+        padding: 0;
+      }
+      .story-card {
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        border-radius: 0;
+      }
+      .story-bars {
+        top: max(10px, env(safe-area-inset-top));
+      }
+      .story-close {
+        top: max(22px, calc(env(safe-area-inset-top) + 14px));
+      }
+      .story-days {
+        top: max(62px, calc(env(safe-area-inset-top) + 54px));
+      }
+      .story-text {
+        bottom: max(72px, calc(env(safe-area-inset-bottom) + 72px));
+      }
+      .story-actions {
+        bottom: max(22px, calc(env(safe-area-inset-bottom) + 14px));
+      }
+    }
+
+    .story-text {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 68px;
+      z-index: 5;
+      color: #fff;
+      pointer-events: none;
+    }
+
+    .story-text h3,
+    .story-text p {
+      opacity: 0;
+      transform: translateY(26px);
+    }
+
+    .story-text.reveal h3 {
+      animation: storyTextIn .5s ease forwards;
+    }
+
+    .story-text.reveal p {
+      animation: storyTextIn .5s ease forwards .12s;
+    }
+
+    @keyframes storyTextIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .story-text h3 {
+      font-family: var(--font-head);
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .story-text p {
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
     .donate-modal h3 {
       font-family: var(--font-head);
       font-size: 1.4rem;
@@ -588,6 +868,7 @@
       align-items: center;
       position: relative;
       overflow: hidden;
+      margin-top: -100px;
     }
 
     .hero::before {
@@ -2188,6 +2469,14 @@
         display: block;
       }
 
+      .hero {
+        align-items: flex-start;
+      }
+
+      .hero-inner {
+        padding: 28px 5% 48px;
+      }
+
       .about-grid,
       .volunteer-grid,
       .contact-grid {
@@ -2339,6 +2628,30 @@
 </head>
 
 <body>
+
+  <!-- STORY BANNER POPUP -->
+  <div class="story-overlay" id="storyOverlay">
+    <div class="story-card" id="storyCard">
+      <div class="story-bars" id="storyBars"></div>
+      <button class="story-close" id="storyClose" aria-label="Close">&times;</button>
+      <div class="story-days" id="storyDays"><i class="fas fa-clock"></i><span id="storyDaysText"></span></div>
+      <div class="story-nav-zone left" id="storyPrev"></div>
+      <div class="story-nav-zone right" id="storyNext"></div>
+      <div class="story-media-wrap">
+        <img class="story-media-bg" id="storyMediaBg" src="" alt="">
+        <img class="story-media" id="storyMedia" src="" alt="">
+      </div>
+      <div class="story-scrim"></div>
+      <div class="story-actions">
+        <button class="story-donate-btn" id="storyDonateBtn">Donate Now</button>
+        <button class="story-contact-btn" id="storyContactBtn">Contact</button>
+      </div>
+      <div class="story-text" id="storyText">
+        <h3 id="storyTitle"></h3>
+        <p id="storyDesc"></p>
+      </div>
+    </div>
+  </div>
 
   <!-- NAVBAR -->
   <header class="navbar">
@@ -3432,6 +3745,219 @@ As we continue to grow, we look forward to expanding our impact with our upcomin
           el.appendChild(s);
         });
       });
+    })();
+
+    /* ── STORY BANNER (Instagram/WhatsApp-style, data from Sheet via Apps Script) ── */
+    (function storyBanner() {
+      // Replace with your deployed Apps Script web-app URL (see Code.gs)
+      const STORY_URL = 'https://script.google.com/macros/s/AKfycbw3tdvijViamMF962zeP2TM2gy-vlQ5voWQ-NljOLBY-EzS8zZj6o50FNb4JswE75Ui/exec';
+      const DEFAULT_DURATION = 5; // seconds, used if sheet leaves duration blank
+      const MIN_DURATION = 2;     // floor — a 0/near-0 sheet value caused runaway auto-advance
+      const NAV_LOCK_MS = 350;    // ignore rapid double-taps/duplicate advances in this window
+
+      const overlay  = document.getElementById('storyOverlay');
+      const barsWrap = document.getElementById('storyBars');
+      const media    = document.getElementById('storyMedia');
+      const mediaBg  = document.getElementById('storyMediaBg');
+      const textWrap = document.getElementById('storyText');
+      const titleEl  = document.getElementById('storyTitle');
+      const descEl   = document.getElementById('storyDesc');
+      const closeBtn = document.getElementById('storyClose');
+      const prevZone = document.getElementById('storyPrev');
+      const nextZone = document.getElementById('storyNext');
+      const donateBtn  = document.getElementById('storyDonateBtn');
+      const contactBtn = document.getElementById('storyContactBtn');
+      const daysBadge  = document.getElementById('storyDays');
+      const daysText   = document.getElementById('storyDaysText');
+
+      let slides = [];
+      let idx = 0;
+      let downTime = 0;
+      let currentFill = null;
+      let navLocked = false;
+      const imageCache = new Map(); // url -> preloaded Image, avoids re-fetch races
+
+      // Warm the browser cache for every slide up front. Without this, each
+      // slide change kicks off a fresh network request; on a real connection
+      // those can resolve OUT OF ORDER, so an old image can paint after a
+      // newer one — exactly the "wrong photo/caption paired together, then
+      // stuck" glitch. Preloading means src swaps just repaint from cache.
+      function preloadSlides() {
+        slides.forEach(s => {
+          if (!s.image || imageCache.has(s.image)) return;
+          const im = new Image();
+          im.src = s.image;
+          imageCache.set(s.image, im);
+        });
+      }
+
+      function buildBars() {
+        barsWrap.innerHTML = slides.map(() =>
+          `<div class="story-bar"><div class="story-bar-fill"></div></div>`
+        ).join('');
+      }
+
+      function renderSlide(i) {
+        const bars = barsWrap.querySelectorAll('.story-bar-fill');
+        bars.forEach((fill, n) => {
+          fill.classList.remove('filling');
+          fill.style.animationDuration = '';
+          fill.style.animationPlayState = '';
+          if (n < i)      fill.style.width = '100%';
+          else if (n > i) fill.style.width = '0%';
+        });
+
+        const slide = slides[i];
+        media.src = slide.image;
+        mediaBg.src = slide.image;
+        titleEl.textContent = slide.title;
+        descEl.textContent  = slide.text;
+        updateDaysLeft(slide);
+
+        textWrap.classList.remove('reveal');
+        void textWrap.offsetWidth; // restart reveal animation
+        textWrap.classList.add('reveal');
+
+        currentFill = bars[i];
+        currentFill.style.width = '0%';
+        void currentFill.offsetWidth;
+        currentFill.style.animationPlayState = 'running';
+        const dur = Math.max(MIN_DURATION, Number(slide.duration) || DEFAULT_DURATION);
+        currentFill.style.animationDuration = dur + 's';
+        currentFill.classList.add('filling');
+
+        // Briefly ignore further advance triggers — blocks a rapid
+        // double-tap or a stray duplicate event from firing a second
+        // renderSlide() before this one has visually settled, which was
+        // producing mismatched image/caption pairs and a frozen finish.
+        navLocked = true;
+        clearTimeout(renderSlide._lockTimer);
+        renderSlide._lockTimer = setTimeout(() => { navLocked = false; }, NAV_LOCK_MS);
+      }
+
+      // Days remaining between today and the slide's event date (dateISO)
+      function updateDaysLeft(slide) {
+        if (!slide.dateISO) { daysBadge.classList.remove('show'); return; }
+
+        const target = new Date(slide.dateISO);
+        if (isNaN(target)) { daysBadge.classList.remove('show'); return; }
+
+        const today = new Date();
+        const startToday  = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const startTarget = new Date(target.getFullYear(), target.getMonth(), target.getDate());
+        const diffDays = Math.round((startTarget - startToday) / 86400000);
+
+        if (diffDays > 1)        daysText.textContent = diffDays + ' days left';
+        else if (diffDays === 1) daysText.textContent = '1 day left';
+        else if (diffDays === 0) daysText.textContent = 'On Today';
+        else                     daysText.textContent = 'Event passed on ' + (slide.text || target.toDateString());
+
+        daysBadge.classList.add('show');
+      }
+
+      // Single delegated listener avoids stacking duplicate handlers across
+      // slide re-renders (which previously could double-fire and skip a slide).
+      barsWrap.addEventListener('animationend', (e) => {
+        if (e.target === currentFill) goNext();
+      });
+
+      function goNext() {
+        if (navLocked) return;
+        if (idx + 1 < slides.length) { idx++; renderSlide(idx); }
+        else closeStory();
+      }
+
+      function goPrev() {
+        if (navLocked) return;
+        if (idx > 0) { idx--; renderSlide(idx); }
+        else renderSlide(idx); // restart first slide
+      }
+
+      function openStory() {
+        idx = 0;
+        downActive = false;
+        overlay.classList.add('open');
+        buildBars();
+        renderSlide(0);
+      }
+
+      function closeStory() {
+        overlay.classList.remove('open');
+        if (currentFill) currentFill.classList.remove('filling');
+        clearTimeout(renderSlide._lockTimer);
+        navLocked = false;
+        idx = 0;
+      }
+
+      function pause() {
+        if (currentFill) currentFill.style.animationPlayState = 'paused';
+      }
+      function resume() {
+        if (currentFill) currentFill.style.animationPlayState = 'running';
+      }
+
+      // Tap = navigate, Hold = pause (like IG stories).
+      // pointerup/cancel are bound to WINDOW, not just the overlay — if a
+      // touch starts on the overlay but the finger lifts elsewhere (common
+      // on mobile), the old overlay-only listener never fired, leaving the
+      // bar paused forever ("stuck" story). Window-level listeners always
+      // catch the release. visibilitychange covers app-switch mid-hold.
+      let downActive = false;
+
+      overlay.addEventListener('pointerdown', (e) => {
+        downTime = Date.now();
+        downActive = true;
+        pause();
+      });
+
+      function releaseHold(e) {
+        if (!downActive) return;
+        downActive = false;
+        resume();
+        if (!e || e.type !== 'pointerup') return;
+        if (Date.now() - downTime > 250) return; // was a hold, not a tap
+      }
+
+      window.addEventListener('pointerup', releaseHold);
+      window.addEventListener('pointercancel', releaseHold);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) releaseHold({ type: 'pointercancel' });
+      });
+
+      prevZone.addEventListener('click', goPrev);
+      nextZone.addEventListener('click', goNext);
+      closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeStory(); });
+
+      function closeAndScroll(id) {
+        closeStory();
+        const target = document.getElementById(id);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      donateBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeAndScroll('donate');
+      });
+
+      contactBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeAndScroll('contact');
+      });
+
+      async function loadStory() {
+        try {
+          const res = await fetch(STORY_URL, { cache: 'no-store' });
+          const data = await res.json();
+          slides = (Array.isArray(data) ? data : []).filter(s => s.image);
+          if (!slides.length) return;
+          preloadSlides();
+          openStory();
+        } catch (e) {
+          console.warn('Story banner fetch failed:', e.message);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', loadStory);
     })();
 
   </script>
